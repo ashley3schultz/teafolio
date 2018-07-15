@@ -4,7 +4,6 @@ class CreatePosts < ActiveRecord::Migration[5.2]
       t.string :content
       t.string :tea_id
       t.string :user_id
-
       t.timestamps
     end
   end
