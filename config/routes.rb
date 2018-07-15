@@ -5,4 +5,5 @@ Rails.application.routes.draw do
   resources :teas
   get 'signup', to: 'users#signup'
   get 'login', to: 'users#login'
+  get 'logout', to: 'users#logout'
 end
