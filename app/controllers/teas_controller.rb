@@ -6,13 +6,14 @@ class TeasController < ApplicationController
     end 
 
     def new
-        @tea = Tea.new
+        @tea = PendingTea.new
     end
 
     def create 
-        @tea = Tea.new 
-
-    end
+        raise "create"
+        @tea = Tea.create(tea_params)
+        redirect_to eanding_teas_path
+    end 
 
     def show
     end 
@@ -21,9 +22,11 @@ class TeasController < ApplicationController
     end 
 
     def update
+        @tea.update(tea_params)
     end 
 
     def destroy
+        @tea.destroy
     end 
 
     def find_tea
