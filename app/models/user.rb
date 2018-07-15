@@ -6,6 +6,6 @@ class User < ApplicationRecord
 
     validates :username, :email, presence: true
     validates :username, :email, uniqueness: true
-    validates :password, length: { min: 7 }
-    validates :email, inclusion: { in: [@, .] }
+    validates :password, length: { minimum: 7 }
+    #validates :email, inclusion: { in: ['@', '.'] }
 end

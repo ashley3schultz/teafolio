@@ -1,0 +1,9 @@
+<%= @user.username %>
+<h1>Tea</h1>
+<% @user.pending_teas.each do |tea| %> 
+    <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
+<% end %>
+
+<% @user.posts.each do |post| %> 
+    <%= render partial: "teas/posts", locals: { post: post } %>
+<% end %>
