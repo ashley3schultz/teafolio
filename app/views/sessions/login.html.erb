@@ -1,7 +1,7 @@
 <h1>Login Form</h1>
 
 <%= form_for :user do |f| %>
-    <%= f.text_field :username, placeholder: @user && !@user.errors[:username].empty? ? @user.errors[:username] : "Username" %><br/>
-    <%= f.password_field :password, placeholder: @user && !@user.errors[:password].empty? ? @user.errors[:password] : "Password" %><br/>
+    <%= f.text_field :username, placeholder: set_ph('username', @user) %><br/>
+    <%= f.password_field :password, placeholder: set_ph('password', @user) %><br/>
     <%= f.submit :Login %>
 <% end %>

@@ -29,7 +29,8 @@ class ApplicationController < ActionController::Base
   end
 
   def set_ph(attr, obj)
-     !obj.errors[:attr].empty? ? obj.errors[:attr].first : attr.capitalize
+    binding.pry
+     obj && !obj.errors[:attr].empty? ? obj.errors[:attr].first : attr.capitalize
   end
 
 end
