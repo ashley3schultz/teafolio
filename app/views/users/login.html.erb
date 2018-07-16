@@ -1,5 +1,0 @@
-<%= form_for @user do |f| %>
-    <%= f.text_field :username, placeholder: !@user.errors[:username].empty? ? @user.errors[:username] : "Username" %><br/>
-    <%= f.password_field :password %><br/>
-    <%= f.submit %>
-<% end %>
