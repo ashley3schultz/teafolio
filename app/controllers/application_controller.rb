@@ -1,5 +1,13 @@
 class ApplicationController < ActionController::Base
 
+  def home
+    if current_user.admin == true
+      rendor :admin
+    else
+      rendor :home
+    end
+  end
+
   def logged_in?
     !!current_user
   end
