@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+  helper_method :current_user, :set_ph
 
   def home
     @posts = Post.all.limit(10)
@@ -22,6 +22,14 @@ class ApplicationController < ActionController::Base
 
   def valid_owner?(obj)
     logged_in? && obj.user_id == current_user.id
+  end
+
+  def require_login
+      return head(:forbidden) unless session.include? :user_id
+  end
+
+  def set_ph(attr, obj)
+     !obj.errors[:attr].empty? ? obj.errors[:attr].first : attr.capitalize
   end
 
 end

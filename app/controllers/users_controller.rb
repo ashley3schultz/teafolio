@@ -13,7 +13,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect_to user_path(@user)
         else
-            redirect_to '/signup'
+            render :signup
         end
     end
 
@@ -30,9 +30,4 @@ class UsersController < ApplicationController
     def set_user
       @user ||= User.find(params[:id])
     end
-
-    def require_login
-        return head(:forbidden) unless session.include? :user_id
-    end
-
 end
