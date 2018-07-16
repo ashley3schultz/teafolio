@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   end
 
   def valid_owner?(obj)
-    obj.user_id == current_user.id
+    logged_in? && obj.user_id == current_user.id
   end
 
 end
