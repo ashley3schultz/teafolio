@@ -1,7 +1,11 @@
 class ApplicationController < ActionController::Base
+  helper_method :current_user
 
   def home
+    @posts = Post.all.limit(10)
     if current_user.admin == true
+      @p_teas = PendingTea.all
+      @users = User.all
       rendor :admin
     else
       rendor :home
