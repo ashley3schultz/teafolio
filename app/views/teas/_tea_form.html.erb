@@ -1,7 +1,7 @@
 <%= form_for @tea do |f| %>
-    <%= f.text_field :name, placeholder: set_ph('name', @tea) %>
-    <%= f.text_field :aka, placeholder: set_ph('aka', @tea) %>
-    <%= f.text_field :oxidation, placeholder: set_ph('oxidation', @tea) %>
-    <%= f.text_field :description, placeholder: set_ph('description', @tea) %>
+    <%= f.text_field :name, placeholder: set_ph('name', @tea) %><br/>
+    <%= f.text_field :aka, placeholder: set_ph('aka', @tea) %><br/>
+    <%= f.text_field :oxidation, placeholder: set_ph('oxidation', @tea) %><br/>
+    <%= f.text_field :description, placeholder: set_ph('description', @tea) %><br/>
     <%= f.submit :submit %>
 <% end %>

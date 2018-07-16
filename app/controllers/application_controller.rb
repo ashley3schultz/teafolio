@@ -3,12 +3,14 @@ class ApplicationController < ActionController::Base
 
   def home
     @posts = Post.all.limit(10)
-    if current_user.admin == true
+    if admin?
       @p_teas = PendingTea.all
       @users = User.all
-      rendor :admin
+      render :admin
     else
-      rendor :home
+      @p_teas = PendingTea.all
+      @users = User.all
+      render :admin
     end
   end
 
@@ -29,8 +31,15 @@ class ApplicationController < ActionController::Base
   end
 
   def set_ph(attr, obj)
-    binding.pry
-     obj && !obj.errors[:attr].empty? ? obj.errors[:attr].first : attr.capitalize
+    if obj.nil?
+      attr.capitalize
+    else
+      "#{attr.capitalize} #{obj.errors[:"#{attr}"].first}" || attr.capitalize
+    end
+  end
+
+  def admin?
+    current_user.admin
   end
 
 end

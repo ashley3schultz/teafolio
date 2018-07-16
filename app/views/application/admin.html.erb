@@ -1,0 +1,19 @@
+<h1>Admin Console</h1>
+<% @posts.each do |post| %>
+  <h2><%= post.user.username %><br>
+  <p><%= post.content %></p></h2>
+<% end %>
+
+<% @users.each do |user| %>
+  <h2><%= user.username %></h2>
+  <p>Admin Status: <%= user.admin %></p>
+  <p>Total Posts: <%= user.posts.size %></p>
+  <p>Submissions:<%= user.pending_teas.size %></p>
+<% end %>
+
+<% @p_teas.each do |tea| %>
+  <h2><%= tea.name %></h2>
+  <p>Aka: <%= tea.aka %></p>
+  <p>Type: <%= tea.oxidation %></p>
+  <p>info:<%= tea.description %></p>
+<% end %>

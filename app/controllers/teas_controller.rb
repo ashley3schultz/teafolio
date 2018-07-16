@@ -1,5 +1,7 @@
 class TeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
+    before_action :admin?, only: [:create, :update, :edit, :destroy]
+
 
     def index
         @teas = Tea.all
@@ -10,12 +12,8 @@ class TeasController < ApplicationController
     end
 
     def create
-        @tea = PendingTea.new(tea_params)
-        if @tea.save
-          redirect_to pending_teas_path
-        else
-          render :new
-        end
+        @tea = Tea.create(tea_params)
+        redirect_to admin_path
     end
 
     def show
