@@ -1,9 +1,11 @@
 class PendingTeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :lo_director
+    before_action :lo_redirector
+    before_action :na_redirector, only: [:index]
 
     def index
       @teas = PendingTea.all
+      redirect_to root_path
     end
 
     def create

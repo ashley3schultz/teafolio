@@ -1,9 +1,11 @@
 class PostsController < ApplicationController
-    before_action :lo_director
+    before_action :lo_redirector
+    before_action :na_redirector, only: [:index]
 
     def index
-        @posts = Post.all 
-    end 
+        @posts = Post.all
+        redirect_to root_path
+    end
 
     def new 
     end 

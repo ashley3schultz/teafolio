@@ -47,14 +47,20 @@ class ApplicationController < ActionController::Base
     logged_in? && current_user.admin == true
   end
 
-  def lo_director
+  def lo_redirector
     if !logged_in?
       render :welcome
     end
   end
 
-  def li_director
+  def li_redirector
     if logged_in?
+      redirect_to root_path
+    end
+  end
+
+  def na_redirector
+    if !admin? 
       redirect_to root_path
     end
   end

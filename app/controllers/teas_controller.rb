@@ -1,7 +1,7 @@
 class TeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :admin?, except: [:index, :show]
-    before_action :lo_director
+    before_action :na_redirector, only: [:create, :edit, :update, :destroy]
+    before_action :lo_redirector
 
     def index
         @teas = Tea.all

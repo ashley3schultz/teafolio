@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-    before_action :lo_director, except: [:new, :create]
-    before_action :li_director, only: [:new, :create]
-
-    #before_action :require_login, only: [:show, :logout]
+    before_action :lo_redirector, except: [:new, :create]
+    before_action :li_redirector, only: [:new, :create]
+    before_action :na_redirector, only: [:index]
 
     def index 
         @users = User.all
