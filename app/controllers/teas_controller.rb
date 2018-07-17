@@ -1,7 +1,7 @@
 class TeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :admin?, only: [:create, :update, :edit, :destroy]
-
+    before_action :admin?, except: [:index, :show]
+    before_action :lo_director
 
     def index
         @teas = Tea.all
@@ -13,7 +13,7 @@ class TeasController < ApplicationController
 
     def create
         @tea = Tea.create(tea_params)
-        redirect_to admin_path
+        redirect_to root_path
     end
 
     def show
@@ -30,11 +30,12 @@ class TeasController < ApplicationController
         @tea.destroy
     end
 
-    def find_tea
-        @tea = Tea.find(params[:id])
-    end
 
     private
+
+        def find_tea
+            @tea = Tea.find(params[:id])
+        end
 
         def tea_params
             params.require(:tea).permit(:name, :aka, :oxidation, :description)

@@ -2,15 +2,19 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :set_ph
 
   def home
-    @posts = Post.all.limit(10)
-    if admin?
-      @p_teas = PendingTea.all
-      @users = User.all
-      render :admin
+    if logged_in?
+      @posts = Post.all.limit(10)
+      if admin?
+        @p_teas = PendingTea.all
+        @users = User.all
+        render :admin
+      else
+        @p_teas = PendingTea.all
+        @users = User.all
+        render :home
+      end
     else
-      @p_teas = PendingTea.all
-      @users = User.all
-      render :admin
+      render :welcome
     end
   end
 
@@ -22,7 +26,7 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
 
-  def valid_owner?(obj)
+  def owner?(obj)
     logged_in? && obj.user_id == current_user.id
   end
 
@@ -39,7 +43,19 @@ class ApplicationController < ActionController::Base
   end
 
   def admin?
-    current_user.admin
+    logged_in? && current_user.admin == true
+  end
+
+  def lo_director
+    if !logged_in?
+      render :welcome
+    end
+  end
+
+  def li_director
+    if logged_in?
+      redirect_to root_path
+    end
   end
 
 end

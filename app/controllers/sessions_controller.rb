@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :lo_director, except: [:new, :create]
+  before_action :li_director, only: [:new, :create]
 
   def new
     render :login
@@ -10,13 +12,12 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to user_path(@user)
     else
-      binding.pry
       render :login
     end
   end
 
   def logout
       session.clear
-      redirect_to new_session_path
+      redirect_to login_path
   end
 end

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+    before_action :lo_director, except: [:new, :create]
+    before_action :li_director, only: [:new, :create]
 
     #before_action :require_login, only: [:show, :logout]
 

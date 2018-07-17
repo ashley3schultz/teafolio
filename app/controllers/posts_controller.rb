@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    before_action :lo_director
 
     def new 
     end 
