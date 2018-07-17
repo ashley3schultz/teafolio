@@ -1,18 +1,27 @@
-<h1>Admin Console</h1>
+<h1>Recent Posts</h1>
 <% @posts.each do |post| %>
   <h2><%= post.user.username %><br>
   <p><%= post.tea.name %></p></h2>
   <p><%= post.content %></p></h2>
 <% end %>
 
+<h1>My Posts</h1>
 <% current_user.posts.each do |post| %>
   <h2><%= post.tea.name %></h2>
   <p><%= post.content %></p>
 <% end %>
 
+<h1>My Tea Contributions</h1>
 <% current_user.pending_teas.each do |tea| %>
   <h2><%= tea.name %></h2>
   <p>Aka: <%= tea.aka %></p>
   <p>Type: <%= tea.oxidation %></p>
   <p>info:<%= tea.description %></p>
+<% end %>
+
+<h1>My Connections</h1>
+<% current_user.friends.each do |friend| %>
+  <h2><%= friend.username %></h2>
+  <p><%= friend.posts.last.tea.name %></p>
+  <p><%= friend.posts.last.content %></p>
 <% end %>

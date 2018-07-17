@@ -4,6 +4,10 @@ class UsersController < ApplicationController
 
     #before_action :require_login, only: [:show, :logout]
 
+    def index 
+        @users = User.all
+    end 
+
     def new
         @user = User.new
         render :signup

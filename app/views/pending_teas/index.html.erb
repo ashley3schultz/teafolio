@@ -1,5 +1,12 @@
 <h1>Pending Teas</h1>
-
 <% @teas.each do |tea| %>
-    <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
+  <%= form_for :tea do |f| %>
+    <%= f.text_field :oxidation, value: "#{tea.oxidation}" %>
+    <%= f.text_field :name, value: "#{tea.name}" %>
+    <%= f.text_field :aka, value: "#{tea.aka}"  if tea.aka %><br/>
+    <%= f.text_area :description, value: "#{tea.description}" %><br/>
+    <%= f.submit :submit %>
+    <br/>
+    <br/>
+  <% end %>
 <% end %>

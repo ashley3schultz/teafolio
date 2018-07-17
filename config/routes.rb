@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :posts, only: [:create, :update, :destroy]
-  resources :pending_teas, only: [:show, :create, :edit, :update, :destroy]
-  resources :users, only: [:show, :create]
+  resources :posts, only: [:index, :create, :update, :destroy]
+  resources :pending_teas, only: [:index, :show, :create, :edit, :update, :destroy]
+  resources :users, only: [:index, :show, :create]
   resources :teas
   get 'signup', to: 'users#new'
   get 'login',   to: 'sessions#new'

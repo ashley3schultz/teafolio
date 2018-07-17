@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
       if admin?
         @p_teas = PendingTea.all
         @users = User.all
+        @teas = Tea.all
         render :admin
       else
         @p_teas = PendingTea.all

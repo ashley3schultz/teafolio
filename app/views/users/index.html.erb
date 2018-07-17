@@ -1,0 +1,7 @@
+<h1>Users</h1>
+<% @users.each do |user| %>
+    <%= user.username %>
+    <%= user.pending_teas.size %>
+    <%= user.posts.size %>
+    <%= user.admin %>
+<% end %>

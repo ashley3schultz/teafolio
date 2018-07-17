@@ -4,16 +4,9 @@
   <p><%= post.content %></p></h2>
 <% end %>
 
-<% @users.each do |user| %>
-  <h2><%= user.username %></h2>
-  <p>Admin Status: <%= user.admin %></p>
-  <p>Total Posts: <%= user.posts.size %></p>
-  <p>Submissions:<%= user.pending_teas.size %></p>
-<% end %>
-
-<% @p_teas.each do |tea| %>
-  <h2><%= tea.name %></h2>
-  <p>Aka: <%= tea.aka %></p>
-  <p>Type: <%= tea.oxidation %></p>
-  <p>info:<%= tea.description %></p>
-<% end %>
+<h2>Stats</h2>
+<h3>Users: <%= link_to @users.size, users_path %></h3>
+<h3>Teas: <%= link_to @teas.size, teas_path %></h3>
+<h3>Posts: <%= link_to @posts.size, posts_path  %></h3>
+<h3>Pending Teas: <%= link_to @p_teas.size, pending_teas_path %></h3>
+  

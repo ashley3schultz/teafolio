@@ -1,8 +1,9 @@
 class PendingTeasController < ApplicationController
-    #before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    #before_action :lo_director
+    before_action :find_tea, only: [:show, :update, :edit, :destroy]
+    before_action :lo_director
 
     def index
+      @teas = PendingTea.all
     end
 
     def create

@@ -10,4 +10,14 @@ class User < ApplicationRecord
     validates :username, :email, uniqueness: true
     validates :password, length: { minimum: 7 }
 
+    def friends 
+        friends = []
+        posts.each do |post|
+            post.tea.posts.each do |p| 
+                friends << p.user
+            end
+        end
+        friends
+    end
+
 end
