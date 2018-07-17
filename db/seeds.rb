@@ -14,12 +14,20 @@ User.create([
     {email: "user9@email.com", username: "user9", password: "password9", admin: false},
     {email: "admin@email.com", username: "admin", password: "passworda", admin: true}])
 
+PendingTea.create([
+    {name: "Amaranth Star", oxidation: "White", description: "White tea star combined with a single red Amaranth.", user_id: 7},
+    {name: "Dragon Pearl Jasmine", aka: "Mo Li Long Zhu", oxidation: "Green", description: "Hand rolled five times infused jasmine Green tea.", user_id: 8},
+    {name: "Iron Goddess", aka: "Tie Guan Yin", oxidation: "Oolong", description: "Dark, 25 year aged Tie Guan Yin made in 1992 and stored immaculately.", user_id: 9},
+    {name: "Yunnan Black", aka: "Chen Hong Cha", oxidation: "Black", description: "Bright, brisk, black tea balanced by warming dry hay notes and a whisper of grape.", user_id: 7},
+    {name: "Young Gushu", aka: "Bing Dao 600 Year Old Gushu Raw", oxidation: "Puerh", description: "Bright and gentle PuErh made from ancient tree leaves picked and blended from the East and West sides of Bingdao.", user_id: 8},
+    {name: "Amber Mountain", aka: "Huo Shan Huang Ya", oxidation: "Yellow", description: "Smooth and elegant tea made in small batches.", user_id: 9}])
+
 Tea.create([
     {name: "Blossoming Jewels", oxidation: "White", description: "Our selection of hand produced blossoming tea created by Chinese artisans."},
     {name: "Elder White", aka: "Ye Sheng Ya Bao", oxidation: "White", description: "The precious lateral buds of wild PuErh trees picked in late winter."},
     {name: "Silver Needle", aka: "Bai Hao Yin Zhen", oxidation: "White", description: "Very early spring picked silver beige buds producing a luscious, thick and soft liquor."},
     {name: "White Peony", aka: "Bai Mu Dan", oxidation: "White", description: "Fluffy blend of buds and leaves for a richer flavour."},
-    {name: "Yabukita Sencha", oxidation: "Green", description: "Early spring picked Japanese steamed tea. Bright lime liquor which is thick and brothy."},
+    {name: "Yabukita Sencha", oxidation: "Gdescriptioneen", description: "Early spring picked Japanese steamed tea. Bright lime liquor which is thick and brothy."},
     {name: "Houjicha", oxidation: "Green", description: "Porcelain roasted blend of three pickings of Bancha Green tea."},
     {name: "Dragonwell", aka: "Long Jing", oxidation: "Green", description: "Pre Qing Ming harvest of one of China’s most famous teas."},
     {name: "Temple Blossom", aka: "Jingshan", oxidation: "Green", description: "Tang Dynasty temple tea closely associated with Buddhist monks which inspired Japanese tea culture."},
@@ -36,11 +44,3 @@ Tea.create([
     {name: "Black Yunnan Tuo", aka: "Fengqing Shu Tuo", oxidation: "Puerh", description: "Ripe PuErh aged since 1998 in Yunnan."},
     {name: "Fire Phoenix", aka: "Shu PuErh", oxidation: "Puerh", description: "Ripe PuErh made from buds and baby leaves and aged since 2008."},
     {name: "Diamond Peak", aka: "Junshan Yinzhen", oxidation: "Yellow", description: "Fragrant Yellow tea which is highly prized in China."}])
-
-PendingTea.create([
-    {name: "Amaranth Star", oxidation: "White", description: "White tea star combined with a single red Amaranth.", user_id: 7},
-    {name: "Dragon Pearl Jasmine", aka: "Mo Li Long Zhu", oxidation: "Green", description: "Hand rolled five times infused jasmine Green tea.", user_id: 8},
-    {name: "Iron Goddess", aka: "Tie Guan Yin", oxidation: "Oolong", description: "Dark, 25 year aged Tie Guan Yin made in 1992 and stored immaculately.", user_id: 9},
-    {name: "Yunnan Black", aka: "Chen Hong Cha", oxidation: "Black", description: "Bright, brisk, black tea balanced by warming dry hay notes and a whisper of grape.", user_id: 7},
-    {name: "Young Gushu", aka: "Bing Dao 600 Year Old Gushu Raw", oxidation: "Puerh", description: "Bright and gentle PuErh made from ancient tree leaves picked and blended from the East and West sides of Bingdao."},
-    {name: "Amber Mountain", aka: "Huo Shan Huang Ya", oxidation: "Yellow", description: "Smooth and elegant tea made in small batches.", user_id: 8}])

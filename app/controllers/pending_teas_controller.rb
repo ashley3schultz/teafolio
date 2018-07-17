@@ -1,6 +1,6 @@
 class PendingTeasController < ApplicationController
-    before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :lo_director
+    #before_action :find_tea, only: [:show, :update, :edit, :destroy]
+    #before_action :lo_director
 
     def index
     end
@@ -33,7 +33,7 @@ class PendingTeasController < ApplicationController
         end
 
         def tea_params
-            params.require(:pending_tea).permit(:name, :aka, :oxidation, :description)
+            params.require(:pending_teas).permit(:name, :aka, :oxidation, :description, :user_id)
         end
 
 end
