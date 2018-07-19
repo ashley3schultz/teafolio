@@ -1,6 +1,6 @@
 class TeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :na_redirector, only: [:create, :edit, :update, :destroy]
+    before_action :na_redirector, only: [:create, :edit, :update]
     before_action :lo_redirector
 
     def add 
@@ -31,7 +31,12 @@ class TeasController < ApplicationController
     end
 
     def destroy
-        @tea.destroy
+        if admin? 
+            @tea.destroy
+        else 
+            UserTea.find_by(tea_id: @tea.id, user_id: current_user.id).destroy
+        end
+        redirect_to root_path
     end
 
 

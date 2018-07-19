@@ -32,7 +32,7 @@ class PendingTeasController < ApplicationController
     private
 
         def find_tea
-            @tea = Tea.find(params[:id])
+            @tea = PendingTea.find(params[:id])
         end
 
         def tea_params
