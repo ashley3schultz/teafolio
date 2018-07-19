@@ -1,28 +1,22 @@
 class UsersController < ApplicationController
     before_action :lo_redirector, except: [:new, :create]
-    before_action :li_redirector, only: [:create]
+    before_action :li_redirector, only: [:new, :create]
     before_action :na_redirector, only: [:index]
 
-    def index 
+    def index
         @users = User.all
-    end 
+    end
 
     def new
-        if params[:tea_id]
-            current_user.teas << Tea.find_by(id: params[:tea_id])
-            current_user.save
-            redirect_to root_path 
-        else 
-            @user = User.new
-            render :signup
-        end
+        @user = User.new
+        render :signup
     end
 
     def create
         @user = User.new(user_params)
         if @user.save
             session[:user_id] = @user.id
-            redirect_to user_path(@user)
+            redirect_to root_path
         else
             render :signup
         end
@@ -35,8 +29,8 @@ class UsersController < ApplicationController
     def destroy
         if params[:tea_id]
             UserTea.find_by(tea_id: params[tea_id], user_id: current_user.id).destroy
-        end 
-        redirect_to root_path 
+        end
+        redirect_to root_path
     end
 
     private

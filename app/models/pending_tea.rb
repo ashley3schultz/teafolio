@@ -2,7 +2,7 @@ class PendingTea < ApplicationRecord
     belongs_to :user
     validates :name, presence: true
     validates :oxidation, presence: true
-    validate :uniue_entry
+    validate :uniue_entry, :on => :create
 
     def uniue_entry
       teas = []
@@ -18,11 +18,11 @@ class PendingTea < ApplicationRecord
           teas << n.downcase.gsub(" ","") unless n.nil?
         end
       end
-      binding.pry
       if teas.include?(name.downcase.gsub(" ",""))
-          record.errors[:name] << "#{name} already exists"
-      else teas.include?(aka.downcase.gsub(" ",""))
-          record.errors[:aka] << "#{aka} already exists"
+          errors[:name] << "#{name} exists"
+      end
+      if teas.include?(aka.downcase.gsub(" ",""))
+          errors[:aka] << "#{aka} exists"
       end
     end
 

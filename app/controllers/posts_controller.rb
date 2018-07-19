@@ -2,10 +2,10 @@ class PostsController < ApplicationController
     before_action :find_post, only: [:update, :edit, :destroy]
     before_action :lo_redirector
 
-
     def create
       @post = Post.create(post_params)
-      redirect_to "/teas/#{params[:tea_id]}"
+      render :'teas/show'
+      redirect_to tea_path(@post.tea)
     end
 
     def edit

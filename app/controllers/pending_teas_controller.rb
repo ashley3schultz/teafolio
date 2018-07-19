@@ -9,24 +9,47 @@ class PendingTeasController < ApplicationController
     end
 
     def create
-      @tea = PendingTea.new(tea_params)
+      @tea = current_user.pending_teas.build(tea_params)
       if @tea.save
         redirect_to root_path
       else
-        render :'teas/new'
+        render :new
       end
     end
 
     def show
+      if !owner?(@tea)
+        redirect_to root_path
+      else
+        render :show
+      end
     end
 
     def edit
+      if !owner?(@tea)
+        redirect_to root_path
+      else
+        render :edit
+      end
     end
 
     def update
+      if owner?(@tea)
+        if @tea.update(tea_params)
+          redirect_to root_path
+        else
+          render :edit
+        end
+      else
+        redirect_to root_path
+      end
     end
 
     def destroy
+      if owner?(@tea)
+        @tea.destroy
+      end
+      redirect_to root_path
     end
 
     private

@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :set_ph, :owner?
+  helper_method :current_user, :set_ph, :set_value, :owner?
 
   def home
     if logged_in?
-      @posts = Post.all.limit(10)
+      @posts = Post.all
       if admin?
         @p_teas = PendingTea.all
         @users = User.all
@@ -58,6 +58,14 @@ class ApplicationController < ActionController::Base
       attr.capitalize
     else
       "#{attr.capitalize} #{obj.errors[:"#{attr}"].first}" || attr.capitalize
+    end
+  end
+
+  def set_value(attr, obj)
+    if !obj.errors[:"#{attr}"].empty?
+      ""
+    else
+      obj[:"#{attr}"] || ""
     end
   end
 

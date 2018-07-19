@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   get 'login',   to: 'sessions#new'
   post 'login',   to: 'sessions#create'
   get 'logout',  to: 'sessions#logout'
+  get 'teas/:id/add',  to: 'teas#add'
   root 'application#home'
 end
