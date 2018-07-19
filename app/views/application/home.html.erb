@@ -9,8 +9,7 @@
 
 <h2 class='tight-title'>My Posts</h2>
 <% current_user.posts.each do |post| %>
-  <h2><%= post.tea.name %></h2>
-  <p><%= post.content %></p>
+  <%= render partial: "users/post_profile", locals: { post: post } %>
 <% end %>
 
 <h2 class='tight-title'>My Collection</h2>
@@ -24,9 +23,6 @@
 <% end %>
 
 <h2 class='tight-title'>My Connections</h2>
-<% current_user.friends.each do |friend| %>
-  <%= render partial: "users/user_profile", locals: { friend: friend } %>
-  <h2><%= friend.username %></h2>
-  <p><%= friend.posts.last.tea.name %></p>
-  <p><%= friend.posts.last.content %></p>
+<% current_user.friends.each do |user| %>
+  <%= render partial: "users/user_profile", locals: { user: user } %>
 <% end %>
