@@ -13,3 +13,176 @@
  *= require_tree .
  *= require_self
  */
+
+@media screen {*/
+  /* --- Reset Styles --- */
+  * {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+
+  /* --- Welcome Page Styles --- */
+  body {
+    background: url(../images/pexels-photo-641038.jpeg) no-repeat center center;
+    color: #333;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    line-height: 18px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .button {
+    width: 236px;
+    padding: 7px;
+  }
+
+  .align-center {
+    overflow:auto;
+    text-align: center;
+  }
+
+  form {
+    width: 30% auto;
+  }
+
+  .text-box {
+    font-size: 1.5em;
+    padding: 5px;
+    margin: 5px auto;
+  }
+
+  .post-line {
+    background: #eee;
+    padding: 2.25%;
+    margin: 2.25%, 5%;
+  }
+
+  .line-break {
+    border-top: 2px solid #ccc;
+  }
+
+  .profile {
+    padding: 2.25%;
+    margin: 2.25%, 5%;
+    border-top: 1px solid #ccc;
+  }
+
+  .tight {
+    line-height: 50%;
+  }
+
+  .tea-type {
+    padding: 2.25%;
+    margin: 2.25%, 5%;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .wrapper {
+    background: rgba(255,255,255,0.75);
+    -moz-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0 0 10px rgba(0,0,0,.3);
+    box-shadow: 0 0 10px rgba(0,0,0,.3);
+    margin: 16px auto;
+    max-width: 960px;
+    padding: 2.25%; /* 18px / 800px */
+    width: 85%;
+  }
+
+  h1 {
+    font-size: 36px;
+    line-height: 54px;
+  }
+
+  h2 {
+    /* border-bottom: 2px solid #ccc; */
+    font-size: 24px;
+    line-height: 36px;
+    margin-bottom: 16px;
+    border-bottom: #333;
+  }
+
+  h3 {
+    font-size: 18px;
+    line-height: 36px;
+  }
+
+  p {
+    margin-bottom: 18px;
+  }
+
+  .main {
+    overflow: hidden;
+  }
+
+  .content {
+    float: left;
+    width: 60%; /* 480px / 800px */
+  }
+
+  .sidebar {
+    background: #eee;
+    border: 1px solid #ccc;
+    float: right;
+    padding: 2.08333333333%; /* 5px / 240px */
+    width: 30%; /* 240px / 800px */
+  }
+
+  .sidebar ul {
+    font-size: 14px;
+  }
+
+  .branding {
+    clear: both;
+  }
+
+  footer.branding {
+    border-top: 2px solid #ccc;
+    margin-top: 20px;
+    padding-top: 20px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    width: auto;
+  }
+
+  .content, .sidebar {
+    float: none;
+    width: 100%;
+  }
+
+  .sidebar {
+    background: transparent;
+    border: none;
+    border-top: 2px solid #ccc;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 24px;
+    line-height: 36px;
+  }
+
+  h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+.field_with_errors input[type='text']{
+  border: 1px solid red;
+  color: red;
+}
+}
+

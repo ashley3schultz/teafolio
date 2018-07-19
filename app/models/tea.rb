@@ -5,4 +5,8 @@ class Tea < ApplicationRecord
 
     validates :name, presence: true
     validates :oxidation, presence: true
+
+    def add_to_collection
+        current_user.teas << self
+    end 
 end

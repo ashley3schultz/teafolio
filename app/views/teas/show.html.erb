@@ -1,6 +1,6 @@
 <h1>Tea</h1>
 <%= render partial: "tea_profile", locals: { tea: @tea } %>
 
-<%= @tea.posts.each do |post| %> 
+<% @tea.posts.each do |post| %> 
     <%= render partial: "teas/posts", locals: { post: post } %>
 <% end %>
