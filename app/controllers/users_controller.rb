@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
     before_action :lo_redirector, except: [:new, :create]
-    before_action :li_redirector, only: [:new, :create]
+    before_action :li_redirector, only: [:create]
     before_action :na_redirector, only: [:index]
 
     def index 
@@ -8,8 +8,15 @@ class UsersController < ApplicationController
     end 
 
     def new
-        @user = User.new
-        render :signup
+        #binding.pry
+        if params[:tea_id]
+            current_user.teas << Tea.find_by(id: params[tea_id])
+            current_user.save
+            redirect_to root_path 
+        else 
+            @user = User.new
+            render :signup
+        end
     end
 
     def create

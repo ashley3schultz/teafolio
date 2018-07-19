@@ -1,10 +1,9 @@
-<h1>User</h1>
-<%= @user.username %>
-<h1>Tea</h1>
-<% @user.pending_teas.each do |tea| %> 
+<%= render partial: "user_profile", locals: { user: @user } %>
+
+<% @user.teas.each do |tea| %> 
     <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
 <% end %>
 
 <% @user.posts.each do |post| %> 
-    <%= render partial: "teas/posts", locals: { post: post } %>
+    <%= render partial: "posts/post_profile", locals: { post: post } %>
 <% end %>

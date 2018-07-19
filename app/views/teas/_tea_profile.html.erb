@@ -4,6 +4,6 @@
 <h3 class='tight'><%= tea.name %><%=  ", AKA: #{tea.aka}" if !tea.aka.blank? %></h3>
 <%= tea.description %>
 <% if !current_user.teas.include?(tea) && tea.class == Tea %>
-    <h5 class='tight'><%= link_to 'Add to collection', 'tea.add_to_collection' %></h5>
+    <h5 class='tight'><%= link_to 'Add to collection', new_tea_user_path(tea) %></h5>
 <% end %>
 </div>

@@ -3,6 +3,10 @@ class TeasController < ApplicationController
     before_action :na_redirector, only: [:create, :edit, :update, :destroy]
     before_action :lo_redirector
 
+    def add 
+        
+    end
+
     def index
         @teas = Tea.all
     end
