@@ -2,27 +2,25 @@
 
 <h2 class='tight-title'>Recent Posts</h2>
 <% @posts.each do |post| %>
-  <h2><%= post.user.username %><br>
-  <p><%= post.tea.name %></p></h2>
-  <p><%= post.content %></p></h2>
+  <%= render partial: "users/post_profile", locals: { post: post } %>
 <% end %>
 
-<h2 class='tight-title'>My Posts</h2>
+<h2 class='tight-title'>My Posts <%= current_user.posts.size %></h2>
 <% current_user.posts.each do |post| %>
   <%= render partial: "users/post_profile", locals: { post: post } %>
 <% end %>
 
-<h2 class='tight-title'>My Collection</h2>
+<h2 class='tight-title'>My Collection <%= current_user.teas.size %></h2>
 <% current_user.teas.each do |tea| %>
   <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
 <% end %>
 
-<h2 class='tight-title'>My Contributions</h2>
+<h2 class='tight-title'>My Contributions <%= current_user.pending_teas.size %></h2>
 <% current_user.pending_teas.each do |tea| %>
   <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
 <% end %>
 
-<h2 class='tight-title'>My Connections</h2>
+<h2 class='tight-title'>My Connections <%= current_user.friends.size %></h2>
 <% current_user.friends.each do |user| %>
   <%= render partial: "users/user_profile", locals: { user: user } %>
 <% end %>

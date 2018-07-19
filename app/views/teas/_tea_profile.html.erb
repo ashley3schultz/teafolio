@@ -7,6 +7,6 @@
     <h5 class='tight'><%= link_to 'Add to collection', new_tea_user_path(tea) %></h5>
 <% end %>
 <% if current_user.teas.include?(tea) %>
-    <h5 class='tight'><%= button_to "Remove from collection", tea, :method => :delete %></h5>
+    <h5 class='tight'><%= link_to "Remove from collection", tea, :method => :delete %></h5>
 <% end %>
 </div>
