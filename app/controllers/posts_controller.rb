@@ -2,8 +2,6 @@ class PostsController < ApplicationController
     before_action :find_post, only: [:update, :edit, :destroy]
     before_action :lo_redirector
 
-    def new
-    end
 
     def create
       @post = Post.create(post_params)
@@ -11,14 +9,18 @@ class PostsController < ApplicationController
     end
 
     def edit
+      @tea = Tea.find(params[:tea_id])
+      redirect_to post_tea_path(@post, @tea)
     end
 
     def update
-      @post.update(content: params[:content])
+      @post.update(content: params[:post][:content])
+      redirect_to root_path
     end
 
     def destroy
       @post.destroy
+      redirect_to root_path
     end
 
     private

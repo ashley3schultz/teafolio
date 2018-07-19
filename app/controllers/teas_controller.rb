@@ -17,7 +17,9 @@ class TeasController < ApplicationController
     end
 
     def show
-      @post = Post.new
+      @edit_post = Post.find(params[:post_id]) if params[:post_id]
+      @new_post = Post.new
+      @user = current_user
     end
 
     def edit

@@ -11,7 +11,7 @@ class PendingTeasController < ApplicationController
     def create
       @tea = PendingTea.new(tea_params)
       if @tea.save
-        redirect_to pending_teas_path
+        redirect_to root_path
       else
         render :'teas/new'
       end
