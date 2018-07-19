@@ -7,5 +7,9 @@ class PendingTea < ApplicationRecord
 
     def name_post_count
         aka.nil? ? "#{name}" : "#{name}, AKA: #{aka}"
-    end 
+    end
+
+    def klass
+      'pending_teas'
+    end
 end

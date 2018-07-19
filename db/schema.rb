@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(version: 2018_07_15_182948) do
 
   create_table "posts", force: :cascade do |t|
     t.string "content"
-    t.string "tea_id"
-    t.string "user_id"
+    t.integer "tea_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

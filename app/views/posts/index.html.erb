@@ -1,6 +1,5 @@
 <h1>Posts</h1>
 <% @posts.each do |post| %>
-    <%= post.tea.name %>
-    <%= post.user.username %>
-    <%= post.content %>
+    <%= link_to post.tea.name, tea_path(post.tea) %>
+    <%= render partial: "post_profile", locals: { post: post } %>
 <% end %>

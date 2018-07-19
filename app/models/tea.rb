@@ -8,5 +8,9 @@ class Tea < ApplicationRecord
 
     def name_post_count
         aka.nil? ? "#{name} (#{posts.size})" : "#{name}, AKA: #{aka} (#{posts.size})"
-    end 
+    end
+
+    def klass
+      'teas'
+    end
 end

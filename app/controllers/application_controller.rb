@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :set_ph
+  helper_method :current_user, :set_ph, :owner?
 
   def home
     if logged_in?
@@ -31,18 +31,6 @@ class ApplicationController < ActionController::Base
     logged_in? && obj.user_id == current_user.id
   end
 
-  def require_login
-      return head(:forbidden) unless session.include? :user_id
-  end
-
-  def set_ph(attr, obj)
-    if obj.nil?
-      attr.capitalize
-    else
-      "#{attr.capitalize} #{obj.errors[:"#{attr}"].first}" || attr.capitalize
-    end
-  end
-
   def admin?
     logged_in? && current_user.admin == true
   end
@@ -60,8 +48,16 @@ class ApplicationController < ActionController::Base
   end
 
   def na_redirector
-    if !admin? 
+    if !admin?
       redirect_to root_path
+    end
+  end
+
+  def set_ph(attr, obj)
+    if obj.nil?
+      attr.capitalize
+    else
+      "#{attr.capitalize} #{obj.errors[:"#{attr}"].first}" || attr.capitalize
     end
   end
 
