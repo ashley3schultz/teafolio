@@ -4,4 +4,8 @@ class PendingTea < ApplicationRecord
 
     validates :name, presence: true
     validates :oxidation, presence: true
+
+    def name_post_count
+        aka.nil? ? "#{name}" : "#{name}, AKA: #{aka}"
+    end 
 end

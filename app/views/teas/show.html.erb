@@ -2,5 +2,5 @@
 <%= render partial: "tea_profile", locals: { tea: @tea } %>
 
 <% @tea.posts.each do |post| %> 
-    <%= render partial: "teas/posts", locals: { post: post } %>
+    <%= render partial: "posts/post_profile", locals: { post: post } %>
 <% end %>
