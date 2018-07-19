@@ -1,25 +1,27 @@
 class PostsController < ApplicationController
-    before_action :lo_redirector
-    before_action :na_redirector, only: [:index]
 
-    def index
-        @posts = Post.all
-        redirect_to root_path
+    def new
     end
 
-    def new 
-    end 
+    def create
+      binding.pry
+      @post = Post.create(post_params)
+      redirect_to "/teas/#{params[:tea_id]}"
+    end
 
-    def create 
-    end 
-
-    def edit 
-    end 
+    def edit
+    end
 
     def update
-    end 
+    end
 
     def destroy
-    end 
-    
+    end
+
+    private
+
+    def post_params
+      params.require(:post).permit(:cuntent, :user_id, :tea_id)
+    end
+
 end

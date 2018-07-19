@@ -1,6 +1,14 @@
 <h1>Tea</h1>
 <%= render partial: "tea_profile", locals: { tea: @tea } %>
 
-<% @tea.posts.each do |post| %> 
+<% @tea.posts.each do |post| %>
     <%= render partial: "posts/post_profile", locals: { post: post } %>
+<% end %>
+
+<%= form_for @post do |f| %>
+  <%= f.label current_user.username %><br/>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :tea_id, value: "#{@tea.id}"  %>
+  <%= f.hidden_field :user_id, value: "#{current_user.id}" %><br/>
+  <%= f.submit 'Publish' %>
 <% end %>

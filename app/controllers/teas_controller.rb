@@ -1,11 +1,7 @@
 class TeasController < ApplicationController
     before_action :find_tea, only: [:show, :update, :edit, :destroy]
-    before_action :na_redirector, only: [:create, :edit, :update]
-    before_action :lo_redirector
+    before_action :admin?, only: [:create, :update, :edit, :destroy]
 
-    def add 
-        
-    end
 
     def index
         @teas = Tea.all
@@ -17,10 +13,11 @@ class TeasController < ApplicationController
 
     def create
         @tea = Tea.create(tea_params)
-        redirect_to root_path
+        redirect_to admin_path
     end
 
     def show
+      @post = Post.new
     end
 
     def edit
@@ -31,20 +28,14 @@ class TeasController < ApplicationController
     end
 
     def destroy
-        if admin? 
-            @tea.destroy
-        else 
-            UserTea.find_by(tea_id: @tea.id, user_id: current_user.id).destroy
-        end
-        redirect_to root_path
+        @tea.destroy
     end
 
+    def find_tea
+        @tea = Tea.find(params[:id])
+    end
 
     private
-
-        def find_tea
-            @tea = Tea.find(params[:id])
-        end
 
         def tea_params
             params.require(:tea).permit(:name, :aka, :oxidation, :description)
