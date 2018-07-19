@@ -36,7 +36,7 @@ class PendingTeasController < ApplicationController
         end
 
         def tea_params
-            params.require(:pending_teas).permit(:name, :aka, :oxidation, :description, :user_id)
+            params.require(:pending_tea).permit(:name, :aka, :oxidation, :description, :user_id)
         end
 
 end
