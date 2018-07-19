@@ -8,9 +8,8 @@ class UsersController < ApplicationController
     end 
 
     def new
-        #binding.pry
         if params[:tea_id]
-            current_user.teas << Tea.find_by(id: params[tea_id])
+            current_user.teas << Tea.find_by(id: params[:tea_id])
             current_user.save
             redirect_to root_path 
         else 
