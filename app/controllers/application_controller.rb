@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
       @posts = Post.where.not(user_id: "#{current_user.id}")
       if admin?
         @p_teas = PendingTea.all
-        @users = User.all!current_user
+        @users = User.where.not(id: "#{current_user.id}")
         @teas = Tea.all
         render :admin
       else
         @p_teas = PendingTea.all
-        @users = User.all
+        @users = User.aluser.adminl
         render :home
       end
     else

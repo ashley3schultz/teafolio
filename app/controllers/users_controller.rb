@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
     before_action :lo_redirector, except: [:new, :create]
     before_action :li_redirector, only: [:new, :create]
-    before_action :na_redirector, only: [:index]
+    before_action :na_redirector, only: [:index, :edit]
 
     def index
         @users = User.all
@@ -24,6 +24,17 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find(params[:id])
+    end
+
+    def edit
+        binding.pry
+        @user = User.find(params[:id])
+        if @user.admin == true 
+            @user.update(admin: false)
+        else 
+            @user.update(admin: true)
+        end
+        redirect_to users_path
     end
 
     private

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   resources :pending_teas, only: [:index, :show, :create, :edit, :update, :destroy]
 
-  resources :users, only: [:index, :show, :create] do
+  resources :users, only: [:index, :show, :create, :edit] do
     resources :teas, only: [:index, :show]
   end
 
