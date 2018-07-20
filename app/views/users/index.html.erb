@@ -1,7 +1,15 @@
 <h1>Users</h1>
 <% @users.each do |user| %>
-    <%= user.username %><%= link_to " - Update Status", edit_user_path(user) %>
+    <%= user.username %>
+    <%= form_for user do |f| %>
+        <%= f.hidden_field :admin, value: "#{user.admin == false ? true : false}"  %>
+        <%= f.submit 'Update Status' %>
+      <% end %>
+
+      
+
+
     <p>Teas: <%= user.pending_teas.size %> | 
     Posts: <%= user.posts.size %> | 
-    Status: <%= user.admin %></p><br/><br/>
+    Admin: <%= user.admin %></p><br/><br/>
 <% end %>
