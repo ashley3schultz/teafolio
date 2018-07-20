@@ -16,7 +16,7 @@ class TeasController < ApplicationController
         UserTea.find_by(tea_id: params[:id], user_id: current_user.id).destroy
         redirect_to root_path
     end
-    
+
 
     def new
         @tea = PendingTea.new
@@ -24,8 +24,18 @@ class TeasController < ApplicationController
     end
 
     def create
-        @tea = Tea.create(tea_params)
-        redirect_to admin_path
+      if admin?
+        @tea = Tea.new(tea_params)
+        if @tea.save
+          PendingTea.find_by(id: params[:tea][:id]).destroy
+          redirect_to pending_teas_path
+        else
+          @teas = PendingTea.all
+          render :'pending_teas/index'
+        end
+      else
+        redirect_to root_path
+      end
     end
 
     def show
@@ -39,6 +49,7 @@ class TeasController < ApplicationController
 
     def update
         @tea.update(tea_params)
+        redirect_to tea_path(@tea)
     end
 
     def destroy

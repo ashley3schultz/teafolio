@@ -3,15 +3,19 @@
 <h2 class='tight'><%= tea.oxidation %> Tea</h2>
 <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
 <%= tea.description %>
-<% if !current_user.teas.include?(tea) && tea.class == Tea %>
+<% if !current_user.teas.include?(tea) && tea.class == Tea && !admin? %>
     <h5 class='tight'><%= link_to 'Add to collection', "teas/#{tea.id}/add" %></h5>
 <% end %>
-<% if current_user.teas.include?(tea) %>
+<% if current_user.teas.include?(tea) && !admin? %>
     <h5 class='tight'><%= link_to "Remove from collection", "teas/#{tea.id}/remove" %></h5>
 <% end %>
 
 <% if current_user.pending_teas.include?(tea) %>
-    <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %><%= link_to "Delete", tea, :method => :delete %></h5>
+    <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
+<% end %>
+
+<% if admin? %>
+    <h5 class='tight'><%= link_to 'Edit', edit_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
 <% end %>
 
 </div>

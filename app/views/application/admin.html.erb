@@ -4,9 +4,8 @@
   <p><%= post.content %></p></h2>
 <% end %>
 
-<h2>Stats</h2>
-<h3>Users: <%= link_to @users.size, users_path %></h3>
-<h3>Teas: <%= link_to @teas.size, teas_path %></h3>
-<h3>Posts: <%= link_to @posts.size, posts_path  %></h3>
+<h2 class='tight-title'>Stats</h2>
+<h3><%= link_to "Users: #{@users.size}", users_path %></h3>
+<h3><%= link_to "Teas: #{@teas.size}", teas_path %></h3>
+<h3><%= link_to "Posts: #{@posts.size}", posts_path  %></h3>
 <h3><%= link_to "Pending Teas: #{@p_teas.size}", pending_teas_path %></h3>
-  

@@ -14,7 +14,7 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-image: url(pexels-photo-641038.jpeg);
+    background-image: url(pexels-photo-1122875.jpeg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     -webkit-background-size: cover;
@@ -29,7 +29,7 @@
   h2.tight {
     margin-top: 25px;
     }
-  
+
 .tight {
     line-height: 50%;
 }
@@ -97,6 +97,25 @@ textarea {
   font-size: 18px;
 }
 
+#deny a{
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+}
 
+#deny {
+  margin-left: 6px;
+  margin-top: 0px;
+  width: 25%;
+  height: 35px;
+}
 
-
+#approve  {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px;
+  margin-left: 6px;
+  margin-top: 0px;
+  width: 25%;
+  height: 35px;
+}

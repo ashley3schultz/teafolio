@@ -4,6 +4,7 @@ class PendingTeasController < ApplicationController
     before_action :na_redirector, only: [:index]
 
     def index
+      @tea = Tea.new
       @teas = PendingTea.all
     end
 
@@ -45,7 +46,7 @@ class PendingTeasController < ApplicationController
     end
 
     def destroy
-      if owner?(@tea)
+      if owner?(@tea) || admin?
         @tea.destroy
       end
       redirect_to root_path

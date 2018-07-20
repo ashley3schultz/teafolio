@@ -1,7 +1,3 @@
-User.destroy_all
-Tea.destroy_all
-PendingTea.destroy_all
-
 User.create([
     {email: "user1@email.com", username: "user1", password: "password1", admin: false},
     {email: "user2@email.com", username: "user2", password: "password2", admin: false},
