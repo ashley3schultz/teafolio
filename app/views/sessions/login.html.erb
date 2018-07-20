@@ -1,6 +1,11 @@
 <h1>Login</h1>
 <%= form_for :user do |f| %>
-    <%= f.text_field :username, placeholder: set_ph('username', @user) %><br/>
-    <%= f.password_field :password, placeholder: set_ph('password', @user) %><br/>
+<div class>
+  <div class="<%= @un_err ? 'field_with_errors' : 'nothing' %>">
+    <%= f.text_field :username, placeholder: set_ph(@un_err || 'username', @user) %><br/>
+  </div>
+  <div class="<%= @pw_err ? 'field_with_errors' : 'nothing' %>">
+    <%= f.password_field :password, placeholder: set_ph(@pw_err || 'password', @user) %><br/>
+  </div>
     <%= f.submit :Login %>
 <% end %>

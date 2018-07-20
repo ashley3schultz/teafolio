@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get 'teas/:id/add',  to: 'teas#add'
   get 'teas/:id/remove',  to: 'teas#remove'
   root 'application#home'
+  get '*path' => redirect('/')
 end

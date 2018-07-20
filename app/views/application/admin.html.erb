@@ -1,11 +1,13 @@
-<h1>Admin Console</h1>
-<% @posts.each do |post| %>
-  <h2><%= post.user.username %><br>
-  <p><%= post.content %></p></h2>
-<% end %>
+<h1 class='page-title'>Admin Console</h1>
 
 <h2 class='tight-title'>Stats</h2>
 <h3><%= link_to "Users: #{@users.size}", users_path %></h3>
 <h3><%= link_to "Teas: #{@teas.size}", teas_path %></h3>
 <h3><%= link_to "Posts: #{@posts.size}", posts_path  %></h3>
 <h3><%= link_to "Pending Teas: #{@p_teas.size}", pending_teas_path %></h3>
+
+<h2 class='tight-title'>Recent Posts</h2>
+<% @posts.each do |post| %>
+  <h3 class='tight'><%= link_to post.tea.name, tea_path(post.tea) %></h3>
+  <%= render partial: "posts/post_profile", locals: { post: post } %>
+<% end %>
