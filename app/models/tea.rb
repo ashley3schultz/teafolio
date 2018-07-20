@@ -6,6 +6,10 @@ class Tea < ApplicationRecord
     validates :name, presence: true
     validates :oxidation, presence: true
 
+    def teas_by_type
+      Tea.all.group(:oxidation)
+    end
+
     def name_post_count
         aka.nil? ? "#{name} (#{posts.size})" : "#{name}, AKA: #{aka} (#{posts.size})"
     end
