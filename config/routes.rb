@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#logout'
   get 'teas/:id/add', to: 'teas#add'
   get 'teas/:id/remove', to: 'teas#remove'
-  get '/auth/facebook/callback' to: 'sessions#create'
-  get '*path' => redirect('/')
+  get '/auth/facebook/callback', to: 'sessions#create'
+  get '*path', to: redirect('/')
   root 'application#home'
 
 end
