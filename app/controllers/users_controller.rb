@@ -27,7 +27,6 @@ class UsersController < ApplicationController
     end
 
     def edit
-        binding.pry
         @user = User.find(params[:id])
         if @user.admin == true 
             @user.update(admin: false)
