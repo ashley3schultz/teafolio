@@ -28,7 +28,11 @@ class UsersController < ApplicationController
 
     def update
         @user = User.find(params[:id])
-        @user.update(admin: params[:user][:admin])
+        if @user.admin == true
+            @user.update(admin: false)
+        else 
+            @user.update(admin: true)
+        end
         redirect_to users_path
     end
 

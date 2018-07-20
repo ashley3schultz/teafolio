@@ -7,8 +7,9 @@ class User < ApplicationRecord
     has_secure_password
 
     validates :username, :email, presence: true
-    validates :username, :email, uniqueness: true
-    validates :password, length: { minimum: 7 }
+    validates :username, :email, uniqueness: true, :on => :create
+    validates :password, length: { minimum: 7 }, :on => :create
+    validates :password, presence: true, :on => :create
 
     def friends
         friends = []
