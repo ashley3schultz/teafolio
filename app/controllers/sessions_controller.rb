@@ -8,13 +8,19 @@ class SessionsController < ApplicationController
 
   def create
      @user = User.find_by(username: params[:user][:username])
-     if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
-      redirect_to root_path
+     if auth = request.env["omniauth.auth"]
+        @user = User.find_or_create_by_omniauth(auth)
+        session[:user_id] = @user.id
+        redirect_to root_path
     else
-      @un_err = "Username can't be blank" if params[:user][:username].blank?
-      @pw_err = "Password can't be blank" if params[:user][:password].blank?
-      render :login
+      if @user && @user.authenticate(params[:user][:password])
+        session[:user_id] = @user.id
+        redirect_to root_path
+      else
+        @un_err = "Username can't be blank" if params[:user][:username].blank?
+        @pw_err = "Password can't be blank" if params[:user][:password].blank?
+        render :login
+      end
     end
   end
 

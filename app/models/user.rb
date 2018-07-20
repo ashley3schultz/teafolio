@@ -11,10 +11,19 @@ class User < ApplicationRecord
     validates :password, length: { minimum: 7 }, :on => :create
     validates :password, presence: true, :on => :create
 
+
+    def self.find_or_create_by_omniauth(auth)
+      oauth_email = auth["info"]["email"] || auth["info"]["nickname"] || auth["info"]["name"]
+      self.where(:email => oauth_email).first_or_create do |user|
+        user.password = SecureRandom.hex
+        user.username = oauth_email.split('@').first
+      end
+    end
+
     def friends
         friends = []
         posts.each do |post|
-            post.tea.posts.each do |p| 
+            post.tea.posts.each do |p|
                 friends << p.user if p.user != self
             end
         end
