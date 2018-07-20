@@ -13,6 +13,12 @@ class TeasController < ApplicationController
         redirect_to root_path
     end
 
+    def remove
+        UserTea.find_by(tea_id: params[tea_id], user_id: current_user.id).destroy
+        redirect_to root_path
+    end
+    
+
     def new
         @tea = PendingTea.new
         render :'pending_teas/new'

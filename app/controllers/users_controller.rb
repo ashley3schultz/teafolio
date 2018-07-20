@@ -26,13 +26,6 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
     end
 
-    def destroy
-        if params[:tea_id]
-            UserTea.find_by(tea_id: params[tea_id], user_id: current_user.id).destroy
-        end
-        redirect_to root_path
-    end
-
     private
 
     def user_params

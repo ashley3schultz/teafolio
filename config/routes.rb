@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :posts, only: [:index, :create, :update, :destroy] do
-    resources :teas, only: [:show]
+    #resources :teas, only: [:show]
   end
   resources :pending_teas, only: [:index, :show, :create, :edit, :update, :destroy]
 
@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   post 'login',   to: 'sessions#create'
   get 'logout',  to: 'sessions#logout'
   get 'teas/:id/add',  to: 'teas#add'
+  get 'teas/:id/remove',  to: 'teas#remove'
   root 'application#home'
 end

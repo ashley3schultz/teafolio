@@ -3,9 +3,14 @@ class PostsController < ApplicationController
     before_action :lo_redirector
 
     def create
-      @post = Post.create(post_params)
-      render :'teas/show'
-      redirect_to tea_path(@post.tea)
+      @tea = Tea.find(params[:post][:tea_id])
+      @new_post = Post.new(post_params)
+      @user = current_user
+      if @new_post.save
+        redirect_to tea_path(@tea)
+      else 
+        render :'teas/show'
+      end
     end
 
     def edit
