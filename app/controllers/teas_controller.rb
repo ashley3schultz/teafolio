@@ -13,7 +13,7 @@ class TeasController < ApplicationController
     end
 
     def remove
-        UserTea.find_by(tea_id: params[tea_id], user_id: current_user.id).destroy
+        UserTea.find_by(tea_id: params[:id], user_id: current_user.id).destroy
         redirect_to root_path
     end
     

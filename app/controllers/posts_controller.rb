@@ -6,7 +6,6 @@ class PostsController < ApplicationController
       @tea = Tea.find(params[:post][:tea_id])
       @new_post = Post.new(post_params)
       @user = current_user
-      binding.pry
       if @new_post.save
         redirect_to tea_path(@tea)
       else 
@@ -18,8 +17,9 @@ class PostsController < ApplicationController
       @new_post = Post.new
       @tea = Tea.find(params[:tea_id])
       @user = current_user
+      @edit_post = @post
       render :'teas/show'
-    ends
+    end
 
     def update
       @post.update(content: params[:post][:content])

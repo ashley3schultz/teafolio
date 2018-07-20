@@ -3,10 +3,10 @@ class ApplicationController < ActionController::Base
 
   def home
     if logged_in?
-      @posts = Post.all
+      @posts = Post.where.not(user_id: "#{current_user.id}")
       if admin?
         @p_teas = PendingTea.all
-        @users = User.all
+        @users = User.all!current_user
         @teas = Tea.all
         render :admin
       else
