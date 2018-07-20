@@ -5,7 +5,6 @@ class PendingTeasController < ApplicationController
 
     def index
       @teas = PendingTea.all
-      redirect_to root_path
     end
 
     def create

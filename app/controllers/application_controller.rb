@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :set_ph, :set_value, :owner?, :logged_in?
+  helper_method :current_user, :set_ph, :set_value, :owner?, :logged_in?, :admin?
 
   def home
     if logged_in?
@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
         render :admin
       else
         @p_teas = PendingTea.all
-        @users = User.aluser.adminl
+        @users = User.all
         render :home
       end
     else

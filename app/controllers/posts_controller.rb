@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
     before_action :find_post, only: [:update, :edit, :destroy]
     before_action :lo_redirector
+    before_action :na_redirector, only: [:index]
+
+    def index
+      @posts = Post.all
+    end 
 
     def create
       @tea = Tea.find(params[:post][:tea_id])
@@ -17,7 +22,9 @@ class PostsController < ApplicationController
       @new_post = Post.new
       @tea = Tea.find(params[:tea_id])
       @user = current_user
-      @edit_post = @post
+      if owner?(@post)
+        @edit_post = @post
+      end
       render :'teas/show'
     end
 
@@ -27,7 +34,9 @@ class PostsController < ApplicationController
     end
 
     def destroy
-      @post.destroy
+      if owner?(@post) || admin?
+        @post.destroy
+      end
       redirect_to root_path
     end
 

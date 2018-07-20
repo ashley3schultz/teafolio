@@ -4,7 +4,7 @@
 <% else  %>
   <p><%= link_to post.user.username, user_path(post.user) %>: <%= post.content %></p>
 <% end %>
-<% if owner?(post) %>
+<% if owner?(post) || admin?%>
   <h5 class='tight'><%= link_to 'Edit', edit_tea_post_path(post.tea, post) %>
   <%= link_to "Delete", post, :method => :delete %></h5>
 <% end %>
