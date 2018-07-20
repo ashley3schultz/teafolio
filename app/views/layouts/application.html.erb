@@ -9,15 +9,21 @@
     </head>
 
     <body>
-      <div class="navbar">
-          <%= link_to "Home",   '/' %>
-          <%= link_to "Teas",   '/teas' %>
-          <%= link_to "Logout", 'logout' %>
+    <div class="wrapper">
+      <div class="header">
+        <h1>Teafolio</h1>
+        <h2>Collect | Connect | Contribute</h2>
       </div>
-    <div class="container">
-    <div class='wrapper'>
+      <% if logged_in?%>
+        <div class="navbar">
+          <h3><%= button_to 'Browse Teas', teas_path %>
+          <%= button_to 'My Profile', root_path %>
+          <%= button_to 'Logout', logout_path %>
+          <%= button_to 'Add A Tea', new_tea_path %></h3>
+          <br></br>
+        </div>
+      <% end %>
       <%= yield %>
-    </div>
     </div>
   </body>
 </html>

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :set_ph, :set_value, :owner?
+  helper_method :current_user, :set_ph, :set_value, :owner?, :logged_in?
 
   def home
     if logged_in?
