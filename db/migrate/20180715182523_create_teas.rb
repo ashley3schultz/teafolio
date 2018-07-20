@@ -5,7 +5,6 @@ class CreateTeas < ActiveRecord::Migration[5.2]
       t.string :aka
       t.string :oxidation
       t.string :description
-      t.integer :rating, default: 0
       t.timestamps
     end
   end

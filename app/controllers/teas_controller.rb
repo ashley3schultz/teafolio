@@ -9,7 +9,7 @@ class TeasController < ApplicationController
 
     def add
         current_user.teas << Tea.find_by(id: params[:id])
-        redirect_to root_path
+        redirect_to teas_path
     end
 
     def remove
@@ -27,7 +27,9 @@ class TeasController < ApplicationController
       if admin?
         @tea = Tea.new(tea_params)
         if @tea.save
-          PendingTea.find_by(id: params[:tea][:id]).destroy
+          p_tea = PendingTea.find_by(id: params[:tea][:id])
+          p_tea.user.add_contribution
+          p_tea.destroy
           redirect_to pending_teas_path
         else
           @teas = PendingTea.all

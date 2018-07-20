@@ -5,15 +5,17 @@ class PostsController < ApplicationController
 
     def index
       @posts = Post.all
-    end 
+    end
 
     def create
       @tea = Tea.find(params[:post][:tea_id])
       @new_post = Post.new(post_params)
       @user = current_user
       if @new_post.save
+        @new_post.user.add_contribution
         redirect_to tea_path(@tea)
-      else 
+      else
+        binding.pry
         render :'teas/show'
       end
     end

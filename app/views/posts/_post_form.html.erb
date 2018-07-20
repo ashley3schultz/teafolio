@@ -2,6 +2,6 @@
   <%= f.label current_user.username %><br/>
   <%= f.text_area :content, placeholder: set_ph('content', post), value: set_value('content', post)  %>
   <%= f.hidden_field :tea_id, value: "#{@tea.id}"  %>
-  <%= f.hidden_field :user_id, value: "#{@user.id}" %><br/>
+  <%= f.hidden_field :user_id, value: "#{@user.id}" %>
   <%= f.submit 'Publish' %>
 <% end %>

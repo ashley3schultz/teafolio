@@ -1,9 +1,9 @@
 <h1>Users</h1>
 <% @users.each do |user| %>
     <%= user.username %>
-    <p>Teas: <%= user.pending_teas.size %> | 
-    Posts: <%= user.posts.size %> | 
-    Admin: <%= user.admin %></p>
+    <p>Teas: <%= user.pending_teas.size %> |
+    Posts: <%= user.posts.size %> |
+    Contributions: <%= user.contributions %></p>
     <h6 class='tight'><%= link_to "#{user.admin == false ? 'grant' : 'remove'} admin permission", user, :method => :put, data: {confirm: "Are you sure you change status for #{user.username}?" } %></h6>
     <br/><br/>
     <% end %>

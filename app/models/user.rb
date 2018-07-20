@@ -30,4 +30,8 @@ class User < ApplicationRecord
         friends.uniq
     end
 
+    def add_contribution
+      self.contributions += 1
+      self.save
+    end
 end
