@@ -1,7 +1,10 @@
 .field_with_errors input[type='text'] {
     border: 1px solid red;
-    color: red;
-    text-decoration-color: red;
+    padding: 5px;
+    margin: 5px;
+    width: 50%;
+    line-height: 30px;
+    font-size: 18px;
   }
 
   html, body {
@@ -76,6 +79,22 @@ a {
 
 a:hover {
   color: #ccc;
+}
+
+input {
+  padding: 5px;
+  margin: 5px;
+  width: 50%;
+  line-height: 30px;
+  font-size: 18px;
+}
+
+textarea {
+  padding: 5px;
+  margin: 5px;
+  width: 50%;
+  line-height: 15px;
+  font-size: 18px;
 }
 
 

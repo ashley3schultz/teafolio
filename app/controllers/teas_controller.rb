@@ -9,7 +9,6 @@ class TeasController < ApplicationController
 
     def add
         current_user.teas << Tea.find_by(id: params[:id])
-        #current_user.save
         redirect_to root_path
     end
 
