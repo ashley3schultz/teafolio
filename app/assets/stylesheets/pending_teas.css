@@ -11,7 +11,13 @@
 
   /* --- Welcome Page Styles --- */
   body {
-    background-image:url(pexels-photo-641038.jpeg);*/
+    background-image: url(pexels-photo-641038.jpeg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     color: #333;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     line-height: 18px;
@@ -58,10 +64,19 @@
     text-align: center;
   }
 
-  .button_to input[type='submit']{
-    width: 25%;
+  button {
+    width: 24%;
     padding: 7px;
   }
+
+a {
+    color: #333;
+    text-decoration: none;
+}
+
+a:hover {
+  color: #ccc;
+}
 
 
 

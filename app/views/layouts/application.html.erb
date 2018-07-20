@@ -16,10 +16,10 @@
       </div>
       <% if logged_in?%>
         <div class="navbar">
-          <h3><%= button_to 'Browse Teas', teas_path %>
-          <%= button_to 'My Profile', root_path %>
-          <%= button_to 'Logout', logout_path %>
-          <%= button_to 'Add A Tea', new_tea_path %></h3>
+          <h3><button><%= link_to 'Browse Teas', teas_path %></button>
+          <button><%= link_to 'My Profile', root_path %></button>
+          <button><%= link_to 'Logout', logout_path %></button>
+          <button><%= link_to 'Add A Tea', new_tea_path %></button></h3>
           <br></br>
         </div>
       <% end %>
