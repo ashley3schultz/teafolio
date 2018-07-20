@@ -2,11 +2,17 @@
 
 <h2 class='tight'><%= tea.oxidation %> Tea</h2>
 <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
-<%= tea.description %>
+<%= tea.description %><br>
+
 <% if !current_user.teas.include?(tea) && tea.class == Tea && !admin? %>
     <h5 class='tight'><%= link_to 'Add to collection', "teas/#{tea.id}/add" %></h5>
 <% end %>
 <% if current_user.teas.include?(tea) && !admin? %>
+    <button class='rate-button'><%= link_to '1', "teas/#{tea.id}/rate/1" %></button>
+    <button class='rate-button'><%= link_to '2', "teas/#{tea.id}/rate/2" %></button>
+    <button class='rate-button'><%= link_to '3', "teas/#{tea.id}/rate/3" %></button>
+    <button class='rate-button'><%= link_to '4', "teas/#{tea.id}/rate/4" %></button>
+    <button class='rate-button'><%= link_to '5', "teas/#{tea.id}/rate/5" %></button>
     <h5 class='tight'><%= link_to "Remove from collection", "teas/#{tea.id}/remove" %></h5>
 <% end %>
 

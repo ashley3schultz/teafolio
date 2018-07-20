@@ -35,7 +35,6 @@ ActiveRecord::Schema.define(version: 2018_07_15_182948) do
     t.string "aka"
     t.string "oxidation"
     t.string "description"
-    t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -43,6 +42,7 @@ ActiveRecord::Schema.define(version: 2018_07_15_182948) do
   create_table "user_teas", force: :cascade do |t|
     t.integer "user_id"
     t.integer "tea_id"
+    t.integer "rating", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
