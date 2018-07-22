@@ -126,8 +126,18 @@ textarea {
   border-bottom: 1px solid #333;
 }
 
-button.rate-button {
+button.selected {
   background-color: #d89e13;
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  padding: 2px;
+  color: white;
+}
+
+button.rate-button {
+  background-color: #ccc;
   border-radius: 50px;
   width: 30px;
   height: 30px;

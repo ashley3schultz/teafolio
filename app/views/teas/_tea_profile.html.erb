@@ -8,11 +8,11 @@
     <h5 class='tight'><%= link_to 'Add to collection', "teas/#{tea.id}/add" %></h5>
 <% end %>
 <% if current_user.teas.include?(tea) && !admin? %>
-    <button class='rate-button'><%= link_to '1', "teas/#{tea.id}/rate/1" %></button>
-    <button class='rate-button'><%= link_to '2', "teas/#{tea.id}/rate/2" %></button>
-    <button class='rate-button'><%= link_to '3', "teas/#{tea.id}/rate/3" %></button>
-    <button class='rate-button'><%= link_to '4', "teas/#{tea.id}/rate/4" %></button>
-    <button class='rate-button'><%= link_to '5', "teas/#{tea.id}/rate/5" %></button>
+    <button class=<%= tea.rating(current_user) == 1 ? 'selected' : 'rate-button' %>><%= link_to '1', "teas/#{tea.id}/rate/1" %></button>
+    <button class=<%= tea.rating(current_user) == 2 ? 'selected' : 'rate-button' %>><%= link_to '2', "teas/#{tea.id}/rate/2" %></button>
+    <button class=<%= tea.rating(current_user) == 3 ? 'selected' : 'rate-button' %>><%= link_to '3', "teas/#{tea.id}/rate/3" %></button>
+    <button class=<%= tea.rating(current_user) == 4 ? 'selected' : 'rate-button' %>><%= link_to '4', "teas/#{tea.id}/rate/4" %></button>
+    <button class=<%= tea.rating(current_user) == 5 ? 'selected' : 'rate-button' %>><%= link_to '5', "teas/#{tea.id}/rate/5" %></button>
     <h5 class='tight'><%= link_to "Remove from collection", "teas/#{tea.id}/remove" %></h5>
 <% end %>
 

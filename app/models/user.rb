@@ -22,9 +22,9 @@ class User < ApplicationRecord
 
     def friends
         friends = []
-        posts.each do |post|
-            post.tea.posts.each do |p|
-                friends << p.user if p.user != self
+        teas.each do |tea|
+            tea.users.each do |user|
+                friends << user if user != self
             end
         end
         friends.uniq
