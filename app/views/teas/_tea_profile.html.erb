@@ -8,7 +8,7 @@
     <h5 class='tight'><%= link_to 'Add to collection', "teas/#{tea.id}/add" %></h5>
 <% end %>
 <% if current_user.teas.include?(tea) && !admin? %>
-    <%= button_to '1', "teas/#{tea.id}/rate/1",,class: 'rate-button' %>
+    <button class='rate-button'><%= link_to '1', "teas/#{tea.id}/rate/1" %></button>
     <button class='rate-button'><%= link_to '2', "teas/#{tea.id}/rate/2" %></button>
     <button class='rate-button'><%= link_to '3', "teas/#{tea.id}/rate/3" %></button>
     <button class='rate-button'><%= link_to '4', "teas/#{tea.id}/rate/4" %></button>
