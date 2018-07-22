@@ -7,7 +7,14 @@ class Tea < ApplicationRecord
     validates :oxidation, presence: true
 
     def self.by_oxidation
-      all.group(:oxidation)
+      teas = {}
+      teas[:Black] = where(oxidation: 'Black')
+      teas[:Green] = where(oxidation: 'Green')
+      teas[:Oolong] = where(oxidation: 'Oolong')
+      teas[:Puerh] = where(oxidation: 'Puerh')
+      teas[:White] = where(oxidation: 'White')
+      teas[:Yellow] = where(oxidation: 'Yellow')
+      teas
     end
 
     def name_post_count

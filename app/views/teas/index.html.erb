@@ -1,4 +1,6 @@
-<h1>Teas</h1><br/>
-<% @teas.each do |tea| %>
-    <%= render partial: "tea_profile", locals: { tea: tea } %>
+<% @teas.each do |type, array| %>
+    <h2><%= "#{type} Tea" %></h2><br/>
+    <% array.each do |tea| %>
+        <%= render partial: "tea_profile", locals: { tea: tea } %>
+    <% end %>
 <% end %>
