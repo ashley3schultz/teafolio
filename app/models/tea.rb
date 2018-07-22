@@ -6,8 +6,8 @@ class Tea < ApplicationRecord
     validates :name, presence: true
     validates :oxidation, presence: true
 
-    def teas_by_type
-      Tea.all.group(:oxidation)
+    def self.by_oxidation
+      all.group(:oxidation)
     end
 
     def name_post_count

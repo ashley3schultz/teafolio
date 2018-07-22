@@ -4,7 +4,7 @@ class TeasController < ApplicationController
     before_action :lo_redirector
 
     def index
-        @teas = Tea.all
+        @teas = Tea.by_oxidation
     end
 
     def add
