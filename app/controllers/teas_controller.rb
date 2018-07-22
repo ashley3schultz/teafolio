@@ -5,6 +5,7 @@ class TeasController < ApplicationController
 
     def index
         @teas = Tea.by_oxidation
+        binding.pry
     end
 
     def add

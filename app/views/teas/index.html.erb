@@ -1,5 +1,4 @@
-<h1>Teas</h1>
-<%= link_to 'Add Tea', new_tea_path %>
+<h1>Teas</h1><br/>
 <% @teas.each do |tea| %>
     <%= render partial: "tea_profile", locals: { tea: tea } %>
 <% end %>
