@@ -62,7 +62,10 @@ class ApplicationController < ActionController::Base
   end
 
   def set_value(attr, obj)
-    if !obj.errors[:"#{attr}"].empty?
+    #binding.pry
+    if obj.nil?
+      ""
+    elsif !obj.errors[:"#{attr}"].empty?
       ""
     else
       obj[:"#{attr}"] || ""
