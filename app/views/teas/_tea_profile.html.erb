@@ -1,6 +1,6 @@
 <div class='profile'>
 
-<h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' %></h2>
+<h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' && current_user.teas.by_oxidation != @teas %></h2>
 <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
 <%= tea.description %><br>
 
