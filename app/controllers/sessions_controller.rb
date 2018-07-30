@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
         redirect_to root_path
       else
         @un_err = "Username can't be blank" if params[:user][:username].blank?
-        @un_err = "Invalid Username" if @user.nil?
+        @un_err = "Invalid Username" if @user.nil? && @un_err.nil?
         params[:user][:password].blank? ? @pw_err = "Password can't be blank" : @pw_err = "Invalid password"
         render :login
       end

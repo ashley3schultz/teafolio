@@ -2,9 +2,9 @@ class PendingTea < ApplicationRecord
     belongs_to :user
     validates :name, presence: true
     validates :oxidation, presence: true
-    validate :uniue_entry, :on => :create
+    #validate :unique_entry, :on => :create
 
-    def uniue_entry
+    def unique_entry
       teas = []
       parr = PendingTea.all.pluck(:name, :aka)
       parr.each do |a|
