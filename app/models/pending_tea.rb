@@ -9,7 +9,7 @@ class PendingTea < ApplicationRecord
       parr = PendingTea.all.pluck(:name, :aka)
       parr.each do |a|
         a.each do |n|
-          teas << n.downcase.gsub(" ","") unless n.nil?
+          teas << n.downcase.gsub(" ","") unless n.blank?
         end
       end
       tarr = Tea.all.pluck(:name, :aka)
