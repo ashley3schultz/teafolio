@@ -23,7 +23,7 @@ Tea.create([
     {name: "Elder White", aka: "Ye Sheng Ya Bao", oxidation: "White", description: "The precious lateral buds of wild PuErh trees picked in late winter."},
     {name: "Silver Needle", aka: "Bai Hao Yin Zhen", oxidation: "White", description: "Very early spring picked silver beige buds producing a luscious, thick and soft liquor."},
     {name: "White Peony", aka: "Bai Mu Dan", oxidation: "White", description: "Fluffy blend of buds and leaves for a richer flavour."},
-    {name: "Yabukita Sencha", oxidation: "Gdescriptioneen", description: "Early spring picked Japanese steamed tea. Bright lime liquor which is thick and brothy."},
+    {name: "Yabukita Sencha", oxidation: "Green", description: "Early spring picked Japanese steamed tea. Bright lime liquor which is thick and brothy."},
     {name: "Houjicha", oxidation: "Green", description: "Porcelain roasted blend of three pickings of Bancha Green tea."},
     {name: "Dragonwell", aka: "Long Jing", oxidation: "Green", description: "Pre Qing Ming harvest of one of China’s most famous teas."},
     {name: "Temple Blossom", aka: "Jingshan", oxidation: "Green", description: "Tang Dynasty temple tea closely associated with Buddhist monks which inspired Japanese tea culture."},

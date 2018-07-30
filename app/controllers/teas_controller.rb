@@ -4,7 +4,11 @@ class TeasController < ApplicationController
     before_action :lo_redirector
 
     def index
+      if params[:user_id]
+        @teas = current_user.teas.by_oxidation
+      else
         @teas = Tea.by_oxidation
+      end
     end
 
     def add

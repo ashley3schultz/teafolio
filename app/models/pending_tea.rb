@@ -2,7 +2,7 @@ class PendingTea < ApplicationRecord
     belongs_to :user
     validates :name, presence: true
     validates :oxidation, presence: true
-    #validate :unique_entry, :on => :create
+    validate :unique_entry, :on => :create
 
     def unique_entry
       teas = []

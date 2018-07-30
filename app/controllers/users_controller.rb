@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     before_action :na_redirector, only: [:index, :update]
 
     def index
-        @users = User.all
+        @users = User.where.not(id: current_user.id)
     end
 
     def new
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
         @user = User.find(params[:id])
         if @user.admin == true
             @user.update(admin: false)
-        else 
+        else
             @user.update(admin: true)
         end
         redirect_to users_path
