@@ -13,10 +13,13 @@ class PostsController < ApplicationController
       @user = current_user
       if @new_post.save
         @new_post.user.add_contribution
-        redirect_to tea_path(@tea)
+        #redirect_to tea_path(@tea)
       else
-        binding.pry
-        render :'teas/show'
+        #render :"teas/show"
+      end
+      respond_to do |format|
+        format.json { render json: @new_post, status: 201}
+        format.html { render :'teas/show'}
       end
     end
 
