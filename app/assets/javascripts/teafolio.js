@@ -55,12 +55,26 @@ function updatePost(obj){
   })
 }
 
-function addTea(teaid){
-  var posting = $.get(`/teas/${teaid}/add.json`)
+function rateTea(teaid, num){
+  var posting = $.get(`/teas/${teaid}/rate/${num}.json`)
   posting.done(function(info){
-    console.log(info.id)
     var id = info.id
-    $(`#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
+    $(`#teaid-${id} button.selected`).attr('class', 'rate-button')
+    $(`#teaid-${id} button#rate-${num}`).attr('class', 'selected')
+  })
+}
+
+function addTea(teaid){
+  var posting = $.get(`/teas/${teaid}/add`)
+  posting.done(function(info){
+    var id = info.id
+    $(`#teaid-${id} div.add-rmv`).html(`
+      <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${id}, 1)">1</a></button>
+      <button class="rate-button" id='rate-2'><a href="javascript:rateTea(${id}, 2)">2</a></button>
+      <button class="rate-button" id='rate-3'><a href="javascript:rateTea(${id}, 3)">3</a></button>
+      <button class="rate-button" id='rate-4'><a href="javascript:rateTea(${id}, 4)">4</a></button>
+      <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
+      <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
   })
 }
 
@@ -69,5 +83,6 @@ function rmvTea(teaid){
   posting.done(function(info){
     var id = info.id
     $(`#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
+    $(`#teaid-${id} div.tea-rate`).text(``)
   })
 }
