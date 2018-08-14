@@ -38,7 +38,10 @@ class PostsController < ApplicationController
 
     def update
       @post.update(content: params[:post][:content])
-      redirect_to root_path
+      respond_to do |format|
+        format.json { render json: @post, status: 201}
+        format.html { redirect_to root_path }
+      end
     end
 
     def destroy
