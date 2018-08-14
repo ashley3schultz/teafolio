@@ -9,7 +9,7 @@ function postProfile(info){
   return $(`#postid-${postid}`).html(`<div class="show-profile" id="postprofile-${postid}">
   <p><strong><a href='/users/${post.user_id}'>${post.user.username}</a>: </strong>${post.content}</p>
   <h5 class='tight'><a href="javascript:renderEditForm(${postid})">Edit </a>
-  <a data-confirm="Are you sure you want to delete this post?" rel="nofollow" data-method="delete" href="/posts/${postid}">Delete</a></h5></div></div>
+  <a data-confirm="Are you sure you want to delete this post?" href="javascript:deletePost(${postid})">Delete</a></h5></div></div>
   <div class="hide-form" id="postform-${postid}">
   <form class="edit_post" id="edit_post_${postid}" action="/posts/${postid}" accept-charset="UTF-8" method="post">
   <input name="utf8" type="hidden" value="✓">
@@ -84,5 +84,16 @@ function rmvTea(teaid){
     var id = info.id
     $(`#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
     $(`#teaid-${id} div.tea-rate`).text(``)
+  })
+}
+
+function deletePost(postid){
+  $.ajax({
+    type:'DELETE',
+    url:`/posts/${postid}.json`,
+    data:{id: postid},
+    success: function(data){
+      $(`#postid-${postid}`).html('')
+    }
   })
 }

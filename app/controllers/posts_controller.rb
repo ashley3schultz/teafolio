@@ -48,7 +48,10 @@ class PostsController < ApplicationController
       if owner?(@post) || admin?
         @post.destroy
       end
-      redirect_to root_path
+      respond_to do |format|
+        format.json { render json: @post}
+        format.html { redirect_to root_path }
+      end
     end
 
     private
