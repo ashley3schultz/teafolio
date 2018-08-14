@@ -1,3 +1,4 @@
+<div class="tea-page">
 <%= link_to '>> Next >>', "javascript:nextTea(#{@tea.id})" %>
 
 <%= render partial: "teas/tea_profile", locals: { tea: @tea } %>
@@ -9,3 +10,5 @@
 </div>
 
 <%= render partial: "posts/post_form", locals: { post: @new_post } %>
+
+</div>

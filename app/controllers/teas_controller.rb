@@ -57,7 +57,7 @@ class TeasController < ApplicationController
       @new_post = Post.new
       @user = current_user
       respond_to do |format|
-        format.json { render json: @edit_post, status: 201}
+        format.json { render json: @tea}
         format.html { render :show }
       end
     end
