@@ -1,4 +1,4 @@
 class PostSerializer < ActiveModel::Serializer
-  attributes :id, :content
-  belongs_to :user
+  attributes :id, :content, :user
+  belongs_to :user, serializer: PostUserSerializer
 end

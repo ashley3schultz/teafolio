@@ -30,7 +30,10 @@ class PostsController < ApplicationController
       if owner?(@post)
         @edit_post = @post
       end
-      render :'teas/show'
+      respond_to do |format|
+        format.json { render json: @edit_post, status: 201}
+        format.html { render :'teas/show'}
+      end
     end
 
     def update

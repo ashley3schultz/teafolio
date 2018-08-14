@@ -1,9 +1,16 @@
-<div class='profile'>
-<% if @edit_post == post %>
-  <%= render partial: "posts/post_form", locals: { post: @edit_post } %>
-<% else  %>
-  <p><strong><%= link_to post.user.username, user_path(post.user) %>: </strong><%= post.content %></p>
-<% end %>
-  <h5 class='tight'><%= link_to 'Edit', edit_tea_post_path(post.tea, post) if owner?(post) %>
-  <%= link_to "Delete", post, :method => :delete, data: {confirm: 'Are you sure you want to delete this post?'} if owner?(post) || admin? %></h5>
+<div class='profile' id='postid-<%= post.id %>'>
+
+<div class="hiddenform" id='postform-<%= post.id %>'>
+  <%= render partial: "posts/post_form", locals: { post: post } %>
+</div>
+
+<div class="showprofile" id='postprofile-<%= post.id %>'>
+  <% if @edit_post == post %>
+    <%= render partial: "posts/post_form", locals: { post: @edit_post } %>
+  <% else %>
+    <p><strong><%= link_to post.user.username, user_path(post.user) %>: </strong><%= post.content %></p>
+  <% end %>
+    <h5 class='tight'><%= link_to 'Edit', "javascript:renderEditForm(#{post.id})" if owner?(post) %>
+    <%= link_to "Delete", post, :method => :delete, data: {confirm: 'Are you sure you want to delete this post?'} if owner?(post) || admin? %></h5>
+  </div>
 </div>

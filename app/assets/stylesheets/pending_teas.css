@@ -145,3 +145,11 @@ button.rate-button {
   padding: 2px;
   color: white;
 }
+
+.hiddenprofile{
+  display: none;
+}
+
+.hiddenform{
+  display: none;
+}
