@@ -6,8 +6,12 @@
     <%= link_to "Delete", post, :method => :delete, data: {confirm: 'Are you sure you want to delete this post?'} if owner?(post) || admin? %></h5>
   </div>
 
+<% if current_user.posts.include?(post) %>
   <div class="hide-form" id='postform-<%= post.id %>'>
     <%= render partial: "posts/post_form", locals: { post: post } %>
   </div>
+<% end %>
+
+
 
 </div>

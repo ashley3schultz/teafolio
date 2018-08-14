@@ -1,5 +1,5 @@
 class TeasController < ApplicationController
-    before_action :find_tea, only: [:show, :update, :edit, :destroy]
+    before_action :find_tea, only: [:show, :update, :edit, :destroy, :add]
     before_action :admin?, only: [:create, :update, :edit, :destroy]
     before_action :lo_redirector
 
@@ -12,13 +12,21 @@ class TeasController < ApplicationController
     end
 
     def add
-        current_user.teas << Tea.find_by(id: params[:id])
-        redirect_to teas_path
+      current_user.teas << @tea
+      respond_to do |format|
+        format.json { render json: @tea, status: 201}
+        format.html { redirect_to teas_path }
+      end
     end
 
     def remove
-        UserTea.find_by(tea_id: params[:id], user_id: current_user.id).destroy
-        redirect_to root_path
+        usertea = UserTea.find_by(tea_id: params[:id], user_id: current_user.id)
+        tea = usertea.tea
+        usertea.destroy
+        respond_to do |format|
+          format.json { render json: tea, status: 201}
+          format.html { redirect_to teas_path }
+        end
     end
 
 
@@ -63,11 +71,11 @@ class TeasController < ApplicationController
         redirect_to root_path
     end
 
-    def find_tea
-        @tea = Tea.find(params[:id])
-    end
-
     private
+
+        def find_tea
+            @tea = Tea.find(params[:id])
+        end
 
         def tea_params
             params.require(:tea).permit(:name, :aka, :oxidation, :description)

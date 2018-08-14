@@ -27,5 +27,5 @@ class Tea < ApplicationRecord
 
     def rating(user)
       UserTea.find_by(tea_id: self.id, user_id: user.id ).rating
-    end 
+    end
 end

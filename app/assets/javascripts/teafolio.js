@@ -54,3 +54,20 @@ function updatePost(obj){
     resethidden()
   })
 }
+
+function addTea(teaid){
+  var posting = $.get(`/teas/${teaid}/add.json`)
+  posting.done(function(info){
+    console.log(info.id)
+    var id = info.id
+    $(`#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
+  })
+}
+
+function rmvTea(teaid){
+  var posting = $.get(`/teas/${teaid}/remove.json`)
+  posting.done(function(info){
+    var id = info.id
+    $(`#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
+  })
+}
