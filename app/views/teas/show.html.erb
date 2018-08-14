@@ -1,15 +1,9 @@
-<div id="tea_profile">
-  <%= render partial: "teas/tea_profile", locals: { tea: @tea } %>
-</div>
+<%= render partial: "teas/tea_profile", locals: { tea: @tea } %>
 
-
+<div id="posts">
 <% @tea.posts.each do |post| %>
     <%= render partial: "posts/post_profile", locals: { post: post } %>
 <% end %>
-
-<div id="js-posts">
 </div>
 
-<div id="post_form">
 <%= render partial: "posts/post_form", locals: { post: @new_post } %>
-</div>

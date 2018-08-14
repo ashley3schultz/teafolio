@@ -1,16 +1,16 @@
 $(function(){
   $('#new_post').submit(function(e){e.preventDefault(); createPost(this)})
+  $('#new_post textarea').on('click', function(e){resethidden()})
 })
 
 function postProfile(info){
   var postid = info.data.id
   var post = info.data.attributes
-  return $(`#postid-${postid}`).html(`
-  <div class="showprofile" id="postprofile-${postid}">
+  return $(`#postid-${postid}`).html(`<div class="show-profile" id="postprofile-${postid}">
   <p><strong><a href='/users/${post.user_id}'>${post.user.username}</a>: </strong>${post.content}</p>
   <h5 class='tight'><a href="javascript:renderEditForm(${postid})">Edit </a>
   <a data-confirm="Are you sure you want to delete this post?" rel="nofollow" data-method="delete" href="/posts/${postid}">Delete</a></h5></div></div>
-  <div class="hiddenform" id="postform-${postid}">
+  <div class="hide-form" id="postform-${postid}">
   <form class="edit_post" id="edit_post_${postid}" action="/posts/${postid}" accept-charset="UTF-8" method="post">
   <input name="utf8" type="hidden" value="✓">
   <input type="hidden" name="_method" value="patch">
@@ -26,27 +26,27 @@ function createPost(obj){
   var values = $(obj).serialize()
   var posting = $.post(path + '.json', values)
   posting.done(function(info){
-    $("#js-posts").append(`<div class='profile' id='postid-${info.data.id}'></div>`)
+    $("#posts").append(`<div class='profile' id='postid-${info.data.id}'></div>`)
     postProfile(info)
-    $('#post_content').val('')
+    $('#new_post textarea').val('')
     $("input").removeAttr('disabled')
   })
 }
 
 function resethidden(){
-  $('.showform').attr('class', 'hiddenform')
-  $('.hiddenprofile').attr('class', 'showprofile')
+  $('.show-form').attr('class', 'hide-form')
+  $('.hide-profile').attr('class', 'show-profile')
 }
 
 function renderEditForm(postid){
   resethidden()
-  $(`#postform-${postid}`).attr('class', 'showform')
-  $(`#postprofile-${postid}`).attr('class', 'hiddenprofile')
+  $(`#postform-${postid}`).attr('class', 'show-form')
+  $(`#postprofile-${postid}`).attr('class', 'hide-profile')
   $(`#edit_post_${postid}`).submit(function(e){e.preventDefault(); updatePost(this)})
 }
 
 function updatePost(obj){
-  var path = $('.showform form.edit_post').attr('action')
+  var path = $('.show-form form.edit_post').attr('action')
   var values = $(obj).serialize()
   var posting = $.post(path + '.json', values)
   posting.done(function(info){
