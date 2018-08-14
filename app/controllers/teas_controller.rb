@@ -56,6 +56,10 @@ class TeasController < ApplicationController
       @edit_post = Post.find(params[:post_id]) if params[:post_id]
       @new_post = Post.new
       @user = current_user
+      respond_to do |format|
+        format.json { render json: @edit_post, status: 201}
+        format.html { render :show }
+      end
     end
 
     def edit
