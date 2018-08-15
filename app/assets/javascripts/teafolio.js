@@ -6,20 +6,26 @@ $(function(){
 function postProfile(info){
   var postid = info.data.id
   var post = info.data.attributes
-  return $(`#postid-${postid}`).html(`<div class="show-profile" id="postprofile-${postid}">
-  <p><strong><a href='/users/${post.user.id}'>${post.user.username}</a>: </strong>${post.content}</p>
-  <h5 class='tight'><a href="javascript:renderEditForm(${postid})">Edit </a>
-  <a data-confirm="Are you sure you want to delete this post?" href="javascript:deletePost(${postid})">Delete</a></h5></div></div>
-  <div class="hide-form" id="postform-${postid}">
-  <form class="edit_post" id="edit_post_${postid}" action="/posts/${postid}" accept-charset="UTF-8" method="post">
-  <input name="utf8" type="hidden" value="✓">
-  <input type="hidden" name="_method" value="patch">
-  <input type="hidden" name="authenticity_token" value="HYSWQOsIbxMpLV+HJ4XQ06o0RnE5cllbQMeMJR2zV0HFac6H+Uk0cUX5ONovZEkRVA5LON/wYm/d8F3TCdPxmg==">
-  <textarea placeholder="Content " name="post[content]" id="post_content">${post.content}</textarea>
-  <input value="${post.tea.id}" type="hidden" name="post[tea_id]" id="post_tea_id">
-  <input value="${info.id}" type="hidden" name="post[user_id]" id="post_user_id">
-  <input type="submit" name="commit" value="Publish" data-disable-with="Publish"></form></div>`)
+  var form = $('#newForm')[0].innerHTML
+  return $(`#postid-${postid}`).html(`
+    <div class="show-profile" id="postprofile-${postid}">
+      <p><strong><a href='/users/${post.user.id}'>${post.user.username}</a>: </strong>${post.content}</p>
+      <h5 class='tight'><a href="javascript:renderEditForm(${postid})">Edit </a>
+      <a data-confirm="Are you sure you want to delete this post?" href="javascript:deletePost(${postid})">Delete</a></h5></div></div>
+      <div class="hide-form" id="postform-${postid}">${form}
+    </div>`)
 }
+
+function fillEditForm(info){
+  var id = info.data.id
+  var content = info.data.attributes.content
+  $(`#postid-${id} form`).attr('class', 'edit_post')
+  $(`#postid-${id} form`).attr('id', `edit_post_${id}`)
+  $(`#postid-${id} form`).attr('action', `/posts/${id}`)
+  $(`#postid-${id} textarea`).val(`${content}`)
+  $(`#postid-${id} form`).append(`<input type="hidden" name="_method" value="patch">`)
+}
+
 
 function createPost(obj){
   var path = $('.new_post').attr('action')
@@ -28,10 +34,11 @@ function createPost(obj){
   posting.done(function(info){
     $("#posts").append(`<div class='profile' id='postid-${info.data.id}'></div>`)
     postProfile(info)
+    fillEditForm(info)
     $('#new_post textarea').val('')
     $("input").removeAttr('disabled')
-    $('#new_post').reset()
   })
+  $(`#edit_post_${postid}`).submit(function(e){e.preventDefault(); updatePost(this)})
 }
 
 function resethidden(){
@@ -52,8 +59,10 @@ function updatePost(obj){
   var posting = $.post(path + '.json', values)
   posting.done(function(info){
     postProfile(info)
+    fillEditForm(info)
     resethidden()
   })
+  $(`#edit_post_${postid}`).submit(function(e){e.preventDefault(); updatePost(this)})
 }
 
 function rateTea(teaid, num){
