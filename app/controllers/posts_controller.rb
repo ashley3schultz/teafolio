@@ -1,7 +1,14 @@
 class PostsController < ApplicationController
-    before_action :find_post, only: [:update, :edit, :destroy]
+    before_action :find_post, only: [:update, :edit, :destroy, :show]
     before_action :lo_redirector
     before_action :na_redirector, only: [:index]
+
+    def show
+      respond_to do |format|
+        format.json { render json: @post, status: 201}
+        format.html { redirect_to tea_path(@post.tea) }
+      end
+    end
 
     def index
       @posts = Post.all
@@ -13,9 +20,7 @@ class PostsController < ApplicationController
       @user = current_user
       if @new_post.save
         @new_post.user.add_contribution
-        #redirect_to tea_path(@tea)
       else
-        #render :"teas/show"
       end
       respond_to do |format|
         format.json { render json: @new_post, status: 201}
