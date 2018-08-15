@@ -153,3 +153,7 @@ button.rate-button {
 .hide-form{
   display: none;
 }
+
+.hide{
+  display: none;
+}

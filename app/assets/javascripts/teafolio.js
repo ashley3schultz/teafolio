@@ -179,3 +179,13 @@ function nextTea(teaid){
       $(`#new_post input#post_tea_id`).val(`${tea.id}`)
   })
 }
+
+function profileView(view){
+  if(view === 'all'){
+    $(`.hide`).attr('class', 'show')
+    $(`#all`).attr('class', 'show-all')
+  }else{
+    $(`.show`).attr('class', 'hide')
+    $(`#${view}`).attr('class', 'show')
+  }
+}
