@@ -30,6 +30,7 @@ function createPost(obj){
     postProfile(info)
     $('#new_post textarea').val('')
     $("input").removeAttr('disabled')
+    $('#new_post').reset()
   })
 }
 
@@ -64,26 +65,37 @@ function rateTea(teaid, num){
   })
 }
 
+function teaBtns(id){
+  $.get(`/teas/${id}/owner.json`, function(resault){
+    if(!!resault){
+      $(`#teaid-${id} div.add-rmv`).html(`
+        <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${id}, 1)">1</a></button>
+        <button class="rate-button" id='rate-2'><a href="javascript:rateTea(${id}, 2)">2</a></button>
+        <button class="rate-button" id='rate-3'><a href="javascript:rateTea(${id}, 3)">3</a></button>
+        <button class="rate-button" id='rate-4'><a href="javascript:rateTea(${id}, 4)">4</a></button>
+        <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
+        <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
+      $.get(`/teas/${id}/rate.json`, function(num){
+        document.getElementById(`rate-${num}`).setAttribute("class", "selected");
+      })
+    }else{
+      $(`#teaid-${id} div.add-rmv`).html(`
+        <h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
+    }
+  })
+}
+
 function addTea(teaid){
   var posting = $.get(`/teas/${teaid}/add.json`)
   posting.done(function(info){
-    var id = info.data.id
-    $(`#teaid-${id} div.add-rmv`).html(`
-      <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${id}, 1)">1</a></button>
-      <button class="rate-button" id='rate-2'><a href="javascript:rateTea(${id}, 2)">2</a></button>
-      <button class="rate-button" id='rate-3'><a href="javascript:rateTea(${id}, 3)">3</a></button>
-      <button class="rate-button" id='rate-4'><a href="javascript:rateTea(${id}, 4)">4</a></button>
-      <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
-      <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
+    teaBtns(info.data.id)
   })
 }
 
 function rmvTea(teaid){
   var posting = $.get(`/teas/${teaid}/remove.json`)
   posting.done(function(info){
-    var id = info.data.id
-    $(`#teaid-${id} div.add-rmv`).html(`
-      <h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
+    teaBtns(info.data.id)
   })
 }
 
@@ -98,30 +110,13 @@ function deletePost(postid){
   })
 }
 
-function teaBtns(teaid){
-  $.get(`/teas/${teaid}/owner.json`, function(resault){
-    if(!!resault){
-      addTea(teaid)
-      $.get(`/teas/${teaid}/rate.json`, function(num){
-        $(`#rate-${num}`).attr('class', 'selected')
-      })
-    }else{
-      $(`#teaid-${teaid} div.add-rmv`).html(`
-        <h5 class="tight"><a href="javascript:addTea(${teaid})">Add to collection</a></h5>`)
-    }
-  })
-}
-
 function teaProfile(id, tea){
-  return `<a href="javascript:nextTea(${id})">Next</a>
-  <div class="profile" id="teaid-${id}">
-    <div class="tea-profile">
-      <h2 class="tight">${tea.oxidation} Tea</h2>
-      <h3 class="tight"><a href="/teas/${id}">${tea.name}, AKA: ${tea.aka} (${tea.posts.length})</a></h3>
-      ${tea.description}<br>
-      <div class="add-rmv"></div>
-    </div>
-  </div>`
+  $('.tea').html(`<div class="profile" id="teaid-${id}">
+    <h2 class="tight">${tea.oxidation} Tea</h2>
+    <h3 class="tight"><a href="/teas/${id}">${tea.name},
+    AKA: ${tea.aka} (${tea.posts.length})</a></h3>
+    ${tea.description}<br><div class="add-rmv"></div></div>`)
+    teaBtns(id)
 }
 
 function teaPosts(posts){
@@ -142,10 +137,14 @@ function nextTea(teaid){
     var id = info.data.id
     var tea = info.data.attributes
     $('.tea-page').html(`
-      ${teaProfile(id, tea)}
+      <a href="javascript:nextTea(${id})">Next</a>
+      <div class="tea"></div>
       <div id="posts"></div>
       <div id="newForm">${form}</div>`)
-      teaBtns(id)
+      teaProfile(id, tea)
       teaPosts(tea.posts)
+      $(`#new_post input#post_tea_id`).val(`${id}`)
+      $('#new_post').submit(function(e){e.preventDefault(); createPost(this)})
+      $('#new_post textarea').on('click', function(e){resethidden()})
   })
 }

@@ -1,6 +1,5 @@
 <div class='profile' id='teaid-<%=tea.id%>'>
 
-  <div class="tea-profile">
     <h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' && current_user.teas.by_oxidation != @teas %></h2>
     <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
     <%= tea.description %><br>
@@ -18,15 +17,12 @@
     <% end %>
   </div>
 
-</div>
+  <% if current_user.pending_teas.include?(tea) %>
+      <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
+  <% end %>
 
-
-<% if current_user.pending_teas.include?(tea) %>
-    <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
-<% end %>
-
-<% if admin? %>
-    <h5 class='tight'><%= link_to 'Edit', edit_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
-<% end %>
+  <% if admin? %>
+      <h5 class='tight'><%= link_to 'Edit', edit_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
+  <% end %>
 
 </div>

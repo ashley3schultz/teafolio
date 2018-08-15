@@ -1,16 +1,19 @@
 <div class="tea-page">
-<%= link_to '>> Next >>', "javascript:nextTea(#{@tea.id})" %>
 
-<%= render partial: "teas/tea_profile", locals: { tea: @tea } %>
+  <%= link_to 'Next', "javascript:nextTea(#{@tea.id})" %>
 
-<div id="posts">
-<% @tea.posts.each do |post| %>
-    <%= render partial: "posts/post_profile", locals: { post: post } %>
-<% end %>
-</div>
+  <div class="tea">
+    <%= render partial: "teas/tea_profile", locals: { tea: @tea } %>
+  </div>
 
-<div id="newForm">
-  <%= render partial: "posts/post_form", locals: { post: @new_post } %>
-</div>
+  <div id="posts">
+  <% @tea.posts.each do |post| %>
+      <%= render partial: "posts/post_profile", locals: { post: post } %>
+  <% end %>
+  </div>
+
+  <div id="newForm">
+    <%= render partial: "posts/post_form", locals: { post: @new_post } %>
+  </div>
 
 </div>
