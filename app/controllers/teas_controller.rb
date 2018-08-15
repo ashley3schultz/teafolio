@@ -1,5 +1,5 @@
 class TeasController < ApplicationController
-    before_action :find_tea, only: [:show, :update, :edit, :destroy, :add]
+    before_action :find_tea, only: [:show, :update, :edit, :destroy, :add, :remove]
     before_action :admin?, only: [:create, :update, :edit, :destroy]
     before_action :lo_redirector
 
@@ -20,13 +20,11 @@ class TeasController < ApplicationController
     end
 
     def remove
-        usertea = UserTea.find_by(tea_id: params[:id], user_id: current_user.id)
-        tea = usertea.tea
-        usertea.destroy
-        respond_to do |format|
-          format.json { render json: tea, status: 201}
-          format.html { redirect_to teas_path }
-        end
+      UserTea.find_by(tea_id: params[:id], user_id: current_user.id).destroy
+      respond_to do |format|
+        format.json { render json: @tea, status: 201}
+        format.html { redirect_to teas_path }
+      end
     end
 
 

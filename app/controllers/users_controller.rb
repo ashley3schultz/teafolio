@@ -3,6 +3,16 @@ class UsersController < ApplicationController
     before_action :li_redirector, only: [:new, :create]
     before_action :na_redirector, only: [:index, :update]
 
+
+    def owner
+      tea = Tea.find(params[:tea_id])
+      a = current_user.teas.include?(tea)
+      respond_to do |format|
+        format.json { render json: a }
+        format.html { redirect_to tea_path(tea) }
+      end
+    end
+
     def index
         @users = User.where.not(id: current_user.id)
     end

@@ -12,4 +12,14 @@ class UserTeasController < ApplicationController
     end
   end
 
+
+  def rating
+    @row = UserTea.find_by(tea_id: params[:tea_id], user_id: current_user.id)
+    rating = @row.rating
+    respond_to do |format|
+      format.json { render json: rating}
+      format.html { redirect_to tea_path(@row.tea)}
+    end
+  end
+
 end

@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     resources :users, only: [:new, :index, :show, :destroy]
     resources :posts, only: [:edit]
     get '/rate/:id', to: 'user_teas#rate'
+    get '/rate', to: 'user_teas#rating'
+    get '/owner', to: 'users#owner'
   end
 
   get 'signup', to: 'users#new'
