@@ -38,7 +38,6 @@ function createPost(obj){
     $('#new_post textarea').val('')
     $("input").removeAttr('disabled')
   })
-  $(`#edit_post_${postid}`).submit(function(e){e.preventDefault(); updatePost(this)})
 }
 
 function resethidden(){
@@ -62,7 +61,6 @@ function updatePost(obj){
     fillEditForm(info)
     resethidden()
   })
-  $(`#edit_post_${postid}`).submit(function(e){e.preventDefault(); updatePost(this)})
 }
 
 function rateTea(teaid, num){
@@ -134,6 +132,7 @@ function teaPosts(posts){
     var posting = $.get(`/posts/${post.id}.json`)
     posting.done(function(info){
       postProfile(info)
+      fillEditForm(info)
     })
   })
 }
@@ -153,7 +152,6 @@ function nextTea(teaid){
       teaProfile(id, tea)
       teaPosts(tea.posts)
       $(`#new_post input#post_tea_id`).val(`${id}`)
-      $('#new_post').submit(function(e){e.preventDefault(); createPost(this)})
-      $('#new_post textarea').on('click', function(e){resethidden()})
+      createListeners()
   })
 }
