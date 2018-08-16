@@ -50,6 +50,7 @@
     max-width: 960px;
     padding: 2.25%; /* 18px / 800px */
     width: 85%;
+    overflow: auto;
 }
 
 .profile {
@@ -156,4 +157,28 @@ button.rate-button {
 
 .hide{
   display: none;
+}
+
+#search{
+  width: 40%;
+  float: right;
+}
+
+.toggle-nav{
+  font-size: 1.5em;
+  line-height: 2em;
+  padding-left: 8px;
+}
+
+.side-bar{
+  width: 25%;
+  float: left;
+  display: block;
+  border-right: 1px solid #ddd;
+}
+
+.main-area{
+  margin-left: 1%;
+  width: 73%;
+  float: right;
 }

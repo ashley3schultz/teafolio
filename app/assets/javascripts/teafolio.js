@@ -9,7 +9,7 @@ class Tea {
     this.posts = data.attributes.posts
   }
   fullName(){
-    return `${this.name}, AKA: ${this.aka} (${this.posts.length})`
+    return `${this.name}${this.aka ? `, AKA: ${this.aka}` : ''} (${this.posts.length})`
   }
 }
 

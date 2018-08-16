@@ -1,46 +1,50 @@
-<h1><%= current_user.username %> ~ <%= current_user.contributions %></h1>
-
-<div class="toggle-nav">
-  <%= link_to "Recent Posts", "javascript:profileView('recentPosts')" %>
-  <%= link_to "My Pending Teas", "javascript:profileView('myPending')" %>
-  <%= link_to "My Collection", "javascript:profileView('myCollection')" %>
-  <%= link_to "My Posts", "javascript:profileView('myPosts')" %>
-  <%= link_to "My Friends", "javascript:profileView('myFriends')" %>
+<div class="side-bar">
+  <div class="toggle-nav">
+    <%= link_to "Recent Posts", "javascript:profileView('recentPosts')" %><br/>
+    <%= link_to "My Pending Teas", "javascript:profileView('myPending')" %><br/>
+    <%= link_to "My Collection", "javascript:profileView('myCollection')" %><br/>
+    <%= link_to "My Posts", "javascript:profileView('myPosts')" %><br/>
+    <%= link_to "My Friends", "javascript:profileView('myFriends')" %><br/>
+  </div>
 </div>
 
-<div class="hide" id='myPending'>
-  <h2 class='tight-title'>My Tea Contributions <%= current_user.pending_teas.size %></h2>
-  <% current_user.pending_teas.each do |tea| %>
-    <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
-  <% end %>
-</div>
+<div class="main-area">
+  <h1><%= current_user.username %> ~ <%= current_user.contributions %></h1>
 
-<div class="hide" id='myPosts'>
-  <h2 class='tight-title'>My Posts Contributions <%= current_user.posts.size %></h2>
-  <% current_user.posts.each do |post| %>
-    <%= link_to post.tea.name, tea_path(post.tea) %>
-    <%= render partial: "posts/post_profile", locals: { post: post } %>
-  <% end %>
-</div>
+  <div class="hide" id='myPending'>
+    <h2 class='tight-title'>My Tea Contributions <%= current_user.pending_teas.size %></h2>
+    <% current_user.pending_teas.each do |tea| %>
+      <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
+    <% end %>
+  </div>
 
-<div class="hide" id='myCollection'>
-  <h2 class='tight-title'>My Collection <%= current_user.teas.size %></h2>
-  <% current_user.teas.each do |tea| %>
-    <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
-  <% end %>
-</div>
+  <div class="hide" id='myPosts'>
+    <h2 class='tight-title'>My Posts Contributions <%= current_user.posts.size %></h2>
+    <% current_user.posts.each do |post| %>
+      <%= link_to post.tea.name, tea_path(post.tea) %>
+      <%= render partial: "posts/post_profile", locals: { post: post } %>
+    <% end %>
+  </div>
 
-<div class="hide" id='myFriends'>
-  <h2 class='tight-title'>My Connections <%= current_user.friends.size %></h2>
-  <% current_user.friends.each do |user| %>
-    <%= render partial: "users/user_profile", locals: { user: user } %>
-  <% end %>
-</div>
+  <div class="hide" id='myCollection'>
+    <h2 class='tight-title'>My Collection <%= current_user.teas.size %></h2>
+    <% current_user.teas.each do |tea| %>
+      <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
+    <% end %>
+  </div>
 
-<div class="show" id='recentPosts'>
-  <h2 class='tight-title'>Recent Posts</h2>
-  <% @posts.each do |post| %>
-    <%= link_to post.tea.name, tea_path(post.tea) %>
-    <%= render partial: "posts/post_profile", locals: { post: post } %>
-  <% end %>
+  <div class="hide" id='myFriends'>
+    <h2 class='tight-title'>My Connections <%= current_user.friends.size %></h2>
+    <% current_user.friends.each do |user| %>
+      <%= render partial: "users/user_profile", locals: { user: user } %>
+    <% end %>
+  </div>
+
+  <div class="show" id='recentPosts'>
+    <h2 class='tight-title'>Recent Posts</h2>
+    <% @posts.each do |post| %>
+      <%= link_to post.tea.name, tea_path(post.tea) %>
+      <%= render partial: "posts/post_profile", locals: { post: post } %>
+    <% end %>
+  </div>
 </div>

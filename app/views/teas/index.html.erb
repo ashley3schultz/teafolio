@@ -1,22 +1,25 @@
-<input type="text" name="search" id='search'>
-
-<div class="toggle-nav">
-  <%= link_to "Black Tea", "javascript:profileView('Black')" %>
-  <%= link_to "Green Tea", "javascript:profileView('Green')" %>
-  <%= link_to "Oolong Tea", "javascript:profileView('Oolong')" %>
-  <%= link_to "Puerh Tea", "javascript:profileView('Puerh')" %>
-  <%= link_to "White Tea", "javascript:profileView('White')" %>
-  <%= link_to "Yellow Tea", "javascript:profileView('Yellow')" %>
-  <%= link_to "All Tea", "javascript:profileView('all')" %>
+<div class="side-bar">
+  <div class="toggle-nav">
+    <%= link_to "Black Tea", "javascript:profileView('Black')" %><br/>
+    <%= link_to "Green Tea", "javascript:profileView('Green')" %><br/>
+    <%= link_to "Oolong Tea", "javascript:profileView('Oolong')" %><br/>
+    <%= link_to "Puerh Tea", "javascript:profileView('Puerh')" %><br/>
+    <%= link_to "White Tea", "javascript:profileView('White')" %><br/>
+    <%= link_to "Yellow Tea", "javascript:profileView('Yellow')" %><br/>
+    <%= link_to "All Tea", "javascript:profileView('all')" %><br/>
+  </div>
 </div>
 
-<div class="show-all" id='all'>
-  <% @teas.each do |type, array| %>
-    <div class="show" id='<%=type%>'>
-      <h2><%= "#{type} Tea" %></h2><br/>
-        <% array.each do |tea| %>
-          <%= render partial: "tea_profile", locals: { tea: tea } %>
-        <% end %>
-    </div>
-  <% end %>
+<div class="main-area">
+  <input type="text" name="search" id='search'>
+  <div class="show-all" id='all'>
+    <% @teas.each do |type, array| %>
+      <div class="show" id='<%=type%>'>
+        <h2><%= "#{type} Tea" %></h2><br/>
+          <% array.each do |tea| %>
+            <%= render partial: "tea_profile", locals: { tea: tea } %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
