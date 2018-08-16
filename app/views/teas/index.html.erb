@@ -8,10 +8,18 @@
     <%= link_to "Yellow Tea", "javascript:profileView('Yellow')" %><br/>
     <%= link_to "All Tea", "javascript:profileView('all')" %><br/>
   </div>
+
+  <div class="widget">
+    <br/><strong>Timer</strong><br/><br/>
+    <div class="timer">
+      <input type="number" class='timebox' id="min" integer="true" placeholder="00"/>:<input type="number" class='timebox' id="sec" integer="true" placeholder="00"/>
+    </div>
+    <br/><%= link_to 'Start', 'javascript:timer()' %><br/><br/>
+  </div>
 </div>
 
 <div class="main-area">
-  <input type="text" name="search" id='search'>
+  <input type="text" name="search" id='search' placeholder="Search...">
   <div class="show-all" id='all'>
     <% @teas.each do |type, array| %>
       <div class="show" id='<%=type%>'>

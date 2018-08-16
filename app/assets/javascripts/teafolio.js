@@ -203,3 +203,21 @@ function profileView(view){
     $(`#${view}`).attr('class', 'show')
   }
 }
+
+function timer() {
+  var min = $('#min').val()
+  var sec = $('#sec').val()
+  if((min > 0) || (sec > 0)){
+    if(sec == 0){
+      if(min < 11){min = '0' + --min}else{--min}
+      $('#min').val(`${min}`)
+      $('#sec').val(`59`)
+    }else{
+      if(sec < 11){sec = '0' + --sec}else{--sec}
+      $('#sec').val(`${sec}`)
+    }
+    setTimeout(timer, 1000);
+  }else{
+    alert('alarm')
+  }
+}

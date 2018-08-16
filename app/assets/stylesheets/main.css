@@ -182,3 +182,43 @@ button.rate-button {
   width: 73%;
   float: right;
 }
+
+.widget{
+  width: 50%;
+  font-size: 2em;
+  color: #888;
+  text-align: center;
+  overflow: auto;
+  margin: 25px 0px;
+
+}
+
+.timebox{
+  width: 45%;
+  padding: 5px 0px;
+  margin: 0px;
+  background: white;
+  border: 0px;
+  text-align: center;
+  font-size: 1em;
+  color: #aaa;
+}
+
+.timebox::placeholder{
+  color: #aaa;
+}
+
+.timer{
+  width: 100%;
+  background: white;
+  height: 50px;
+  font-size: 1em;
+  color: #aaa;
+  text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
