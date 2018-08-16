@@ -31,12 +31,13 @@ $(function(){
 })
 
 function search(item){
-  $('.show-all').html('')
+  $('.show').attr('class', 'hide')
+  $('.show-search').html('')
   var string = $('#search').val()
   $.get(`/search/${string}.json`, function(info){
     info.data.forEach(function(t){
       tea = new Tea(t)
-      $('.show-all').append(`<div class="profile" id="teaid-${tea.id}">
+      $('.show-search').append(`<div class="profile" id="teaid-${tea.id}">
         <h2 class="tight">${tea.oxidation} Tea</h2>
         <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
         ${tea.description}<br><div class="add-rmv"></div></div>`)
@@ -178,8 +179,6 @@ function teaPosts(posts){
 }
 
 function nextTea(teaid){
-  var username = $('#new_post label').html()
-  var userid = $('#post_user_id').val()
   var form = $('#newForm')[0].innerHTML
   $.get(`/teas/${++teaid}.json`, function(info){
     tea = new Tea(info.data)
@@ -194,10 +193,10 @@ function nextTea(teaid){
   })
 }
 
-function profileView(view){
+function toggleView(view){
+  $(`.show-search`).html('')
   if(view === 'all'){
     $(`.hide`).attr('class', 'show')
-    $(`#all`).attr('class', 'show-all')
   }else{
     $(`.show`).attr('class', 'hide')
     $(`#${view}`).attr('class', 'show')

@@ -1,12 +1,12 @@
 <div class="side-bar">
   <div class="toggle-nav">
-    <%= link_to "Black Tea", "javascript:profileView('Black')" %><br/>
-    <%= link_to "Green Tea", "javascript:profileView('Green')" %><br/>
-    <%= link_to "Oolong Tea", "javascript:profileView('Oolong')" %><br/>
-    <%= link_to "Puerh Tea", "javascript:profileView('Puerh')" %><br/>
-    <%= link_to "White Tea", "javascript:profileView('White')" %><br/>
-    <%= link_to "Yellow Tea", "javascript:profileView('Yellow')" %><br/>
-    <%= link_to "All Tea", "javascript:profileView('all')" %><br/>
+    <%= link_to "Black Tea", "javascript:toggleView('Black')" %><br/>
+    <%= link_to "Green Tea", "javascript:toggleView('Green')" %><br/>
+    <%= link_to "Oolong Tea", "javascript:toggleView('Oolong')" %><br/>
+    <%= link_to "Puerh Tea", "javascript:toggleView('Puerh')" %><br/>
+    <%= link_to "White Tea", "javascript:toggleView('White')" %><br/>
+    <%= link_to "Yellow Tea", "javascript:toggleView('Yellow')" %><br/>
+    <%= link_to "All Tea", "javascript:toggleView('all')" %><br/>
   </div>
 
   <div class="widget">
@@ -29,5 +29,7 @@
           <% end %>
       </div>
     <% end %>
+  </div>
+  <div class="show-search">
   </div>
 </div>
