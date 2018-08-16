@@ -7,12 +7,15 @@ Rails.application.routes.draw do
     resources :teas, only: [:index, :show]
   end
 
+  get '/search/:id', to: 'teas#search'
+
   resources :teas do
     resources :users, only: [:new, :index, :show, :destroy]
     resources :posts, only: [:edit]
     get '/rate/:id', to: 'user_teas#rate'
     get '/rate', to: 'user_teas#rating'
     get '/owner', to: 'users#owner'
+
   end
 
   get 'signup', to: 'users#new'

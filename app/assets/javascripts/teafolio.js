@@ -22,15 +22,29 @@ class Post {
     this.user = data.attributes.user
     this.tea = data.attributes.tea
   }
-  description(){
-    return `${this.user.username}: ${this.content}`
-  }
 }
 
 $(function(){
+  $('#search').on('input', function(e){e.preventDefault(); search(this)})
   $('#new_post').submit(function(e){e.preventDefault(); createPost(this)})
   $('#new_post textarea').on('click', function(e){resethidden()})
 })
+
+function search(item){
+  $('.show-all').html('')
+  var string = $('#search').val()
+  $.get(`/search/${string}.json`, function(info){
+    info.data.forEach(function(t){
+      tea = new Tea(t)
+      $('.show-all').append(`<div class="profile" id="teaid-${tea.id}">
+        <h2 class="tight">${tea.oxidation} Tea</h2>
+        <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
+        ${tea.description}<br><div class="add-rmv"></div></div>`)
+        teaBtns(tea.id)
+    })
+  })
+}
+
 
 function postProfile(post){
   return $(`#postid-${post.id}`).html(`

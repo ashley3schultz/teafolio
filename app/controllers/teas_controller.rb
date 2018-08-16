@@ -3,6 +3,15 @@ class TeasController < ApplicationController
     before_action :admin?, only: [:create, :update, :edit, :destroy]
     before_action :lo_redirector
 
+
+    def search
+      @teas = Tea.where('description LIKE (?)', "%#{params[:id]}%")
+      respond_to do |format|
+        format.json { render json: @teas, status: 201}
+        format.html { redirect_to teas_path }
+      end
+    end
+
     def index
       if params[:user_id]
         @teas = current_user.teas.by_oxidation
