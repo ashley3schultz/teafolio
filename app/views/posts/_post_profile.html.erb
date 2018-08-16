@@ -1,17 +1,18 @@
 <div class='profile' id='postid-<%= post.id %>'>
 
   <div class="show-profile" id='postprofile-<%= post.id %>'>
+    <% if request.env['PATH_INFO'] == '/' %>
+      <%= link_to post.tea.name, tea_path(post.tea) %>
+    <% end %>
     <p><strong><%= link_to post.user.username, user_path(post.user) %>: </strong><%= post.content %></p>
     <h5 class='tight'><%= link_to 'Edit', "javascript:renderEditForm(#{post.id})" if owner?(post) %>
     <%= link_to 'Delete', "javascript:deletePost(#{post.id})", data: {confirm: "Are you sure you want to delete this post?"} if owner?(post) || admin? %></h5>
   </div>
 
-<% if current_user.posts.include?(post) %>
-  <div class="hide-form" id='postform-<%= post.id %>'>
-    <%= render partial: "posts/post_form", locals: { post: post } %>
-  </div>
-<% end %>
-
-
+  <% if current_user.posts.include?(post) %>
+    <div class="hide-form" id='postform-<%= post.id %>'>
+      <%= render partial: "posts/post_form", locals: { post: post } %>
+    </div>
+  <% end %>
 
 </div>
