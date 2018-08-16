@@ -1,13 +1,56 @@
-<h1 class='page-title'>Admin Console</h1>
+<div class="side-bar">
+  <div class="toggle-nav">
+    <%= link_to "Users: #{@users.size}", "javascript:toggleView('allUsers')" %><br/>
+    <%= link_to "Teas: #{@t_qty}", "javascript:toggleView('allTeas')" %><br/>
+    <%= link_to "Posts: #{@posts.size}", "javascript:toggleView('allPosts')"  %><br/>
+    <%= link_to "Pending Teas: #{@p_teas.size}", "javascript:toggleView('allPending')" %><br/>
+  </div>
+</div>
 
-<h2 class='tight-title'>Stats</h2>
-<h3><%= link_to "Users: #{@users.size}", users_path %></h3>
-<h3><%= link_to "Teas: #{@teas.size}", teas_path %></h3>
-<h3><%= link_to "Posts: #{@posts.size}", posts_path  %></h3>
-<h3><%= link_to "Pending Teas: #{@p_teas.size}", pending_teas_path %></h3>
+<div class="main-area">
+  <h1 class='page-title'>Admin Console</h1>
 
-<h2 class='tight-title'>Recent Posts</h2>
-<% @posts.each do |post| %>
-  <h3 class='tight'><%= link_to post.tea.name, tea_path(post.tea) %></h3>
-  <%= render partial: "posts/post_profile", locals: { post: post } %>
-<% end %>
+  <div class="hide" id='allUsers'>
+    <h2 class='tight-title'>Users</h2>
+    <% @users.each do |user| %>
+        <%= user.username %>
+        <p>Teas: <%= user.pending_teas.size %> |
+        Posts: <%= user.posts.size %> |
+        Contributions: <%= user.contributions %></p>
+        <h6 class='tight'><%= link_to "#{user.admin == false ? 'grant' : 'remove'} admin permission", user, :method => :put, data: {confirm: "Are you sure you change status for #{user.username}?" } %></h6>
+        <br/><br/>
+      <% end %>
+  </div>
+
+  <div class="hide" id='allTeas'>
+    <h2 class='tight-title'>Teas</h2>
+    <% @teas.each do |tea| %>
+      <%= render partial: "teas/tea_profile", locals: { tea: tea } %>
+    <% end %>
+  </div>
+
+  <div class="hide" id='allPosts'>
+    <h2 class='tight-title'>Recent Posts</h2>
+    <% @posts.each do |post| %>
+      <h3 class='tight'><%= link_to post.tea.name, tea_path(post.tea) %></h3>
+        <%= render partial: "posts/post_profile", locals: { post: post } %>
+    <% end %>
+  </div>
+
+  <div class="show" id='allPending'>
+    <h2 class='tight-title'>Pending Teas</h2>
+    <% @p_teas.each do |tea| %>
+      <%= form_for @tea do |f| %>
+        <%= f.text_field :oxidation, value: "#{tea.oxidation}" %>
+        <%= f.text_field :name, value: "#{tea.name}" %>
+        <%= f.text_field :aka, value: "#{tea.aka}"  if tea.aka %><br/>
+        <%= f.text_area :description, value: "#{tea.description}" %><br/>
+        <%= f.hidden_field :id, value: "#{tea.id}" %>
+        <button id="deny"><%= link_to "Deny", tea, :method => :delete, data: {confirm: 'Are you sure you want to delete this tea?'} %></button>
+        <%= f.submit :Approve, id: 'approve'%>
+        <br/><br/><br/><br/>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

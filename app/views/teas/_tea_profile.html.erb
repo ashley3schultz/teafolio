@@ -1,8 +1,7 @@
 <div class='profile' id='teaid-<%=tea.id%>'>
-
-    <h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' && current_user.teas.by_oxidation != @teas %></h2>
-    <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
-    <%= tea.description %><br>
+  <h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' && current_user.teas.by_oxidation != @teas %></h2>
+  <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
+  <%= tea.description %><br>
 
   <div class="add-rmv">
     <% if current_user.teas.include?(tea) && !admin? %>
@@ -13,7 +12,9 @@
       <button class=<%= tea.rating(current_user) == 5 ? 'selected' : 'rate-button' %> id='rate-5'><%= link_to '5', "javascript:rateTea(#{tea.id}, 5)" %></button>
       <h5 class='tight'><%= link_to "Remove from collection", "javascript:rmvTea(#{tea.id})" %></h5>
     <% else %>
-      <h5 class='tight'><%= link_to 'Add to collection', "javascript:addTea(#{tea.id})" %></h5>
+      <% if !admin? %>
+        <h5 class='tight'><%= link_to 'Add to collection', "javascript:addTea(#{tea.id})" %></h5>
+      <% end %>
     <% end %>
   </div>
 

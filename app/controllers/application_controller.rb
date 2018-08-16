@@ -5,9 +5,11 @@ class ApplicationController < ActionController::Base
     if logged_in?
       @posts = Post.where.not(user_id: "#{current_user.id}")
       if admin?
+        @tea = Tea.new
         @p_teas = PendingTea.all
         @users = User.where.not(id: current_user.id)
         @teas = Tea.all
+        @t_qty = Tea.all.size
         render :admin
       else
         @p_teas = PendingTea.all
@@ -18,6 +20,7 @@ class ApplicationController < ActionController::Base
       render :welcome
     end
   end
+
 
   def logged_in?
     !!current_user
