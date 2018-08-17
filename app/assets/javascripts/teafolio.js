@@ -288,7 +288,7 @@ function teaApprove(obj){
       ${tea.description}<br></div>
       <h5 class="tight"><a href="javascript:renderTeaForm(${tea.id})">Edit</a> |
       <a rel="nofollow" data-method="delete" href="javascript:deleteTea(${tea.id})">Delete</a></h5></div>`)
-      $(`#pendform-${' GET PENDING TEA ID '}`).html('')
+      $(`#pendform-${$(obj).serializeArray()[6].value}`).html('')
   })
 }
 
