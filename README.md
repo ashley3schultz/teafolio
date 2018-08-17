@@ -21,6 +21,7 @@ From the command line
   ```
   rake db:migrate
   ```
+  ```
   rake db:seed
   ```
   ```
