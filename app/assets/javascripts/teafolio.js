@@ -276,8 +276,8 @@ function deleteTea(teaid){
   })
 }
 
-function teaApprove(obj){
-  $(`#pendform-${$(obj).serializeArray()[6]}`).value).html('')
+function teaApprove(teaid){
+  var obj = $(`#pendform-${teaid}`)[0].innerHTML
   var values = $(obj).serialize()
   var posting = $.post(`/teas.json`, values)
   posting.done(function(info){
@@ -290,10 +290,10 @@ function teaApprove(obj){
       <h5 class="tight"><a href="javascript:renderTeaForm(${tea.id})">Edit</a> |
       <a rel="nofollow" data-method="delete" href="javascript:deleteTea(${tea.id})">Delete</a></h5></div>`)
   })
+  $(`#pendform-${teaid}`).html('')
 }
 
 function teaDeny(teaid){
-  console.log(teaid)
   $.ajax({
     type: 'DELETE',
     url: `/pending_teas/${teaid}`,
