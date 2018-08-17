@@ -1,5 +1,4 @@
 <div class='profile' id='teaid-<%=tea.id%>'>
-  <div class='show-profile' id='teaprofile-<%=tea.id%>'>
   <h2 class='tight'><%= "#{tea.oxidation} Tea" if request.env['PATH_INFO'] != '/teas' && current_user.teas.by_oxidation != @teas %></h2>
   <h3 class='tight'><%= link_to tea.name_post_count, "/#{tea.klass}/#{tea.id}" %></h3>
   <%= tea.description %><br>
@@ -17,19 +16,18 @@
         <h5 class='tight'><%= link_to 'Add to collection', "javascript:addTea(#{tea.id})" %></h5>
       <% end %>
     <% end %>
+    <% if current_user.pending_teas.include?(tea) %>
+        <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
+    <% end %>
+    <% if admin? %>
+        <h5 class='tight'><%= link_to 'Edit', "javascript:renerForm(#{tea.id, 'tea'})" %> | <%= link_to "Delete", "javascript:deleteTea(#{tea.id})" %></h5>
+    <% end %>
   </div>
-  <% if current_user.pending_teas.include?(tea) %>
-      <h5 class='tight'><%= link_to 'Edit', edit_pending_tea_path(tea) %> | <%= link_to "Delete", tea, :method => :delete %></h5>
-  <% end %>
 
   <% if admin? %>
-      <h5 class='tight'><%= link_to 'Edit', "javascript:renderTeaForm(#{tea.id})" %> | <%= link_to "Delete", "javascript:deleteTea(#{tea.id})", :method => :delete %></h5>
-  <% end %>
-</div>
-
-  <% if admin? %>
-    <div class="hide-form" id='teaform-<%=tea.id%>'>
+    <div class="hide-form" id='teaform-<%= tea.id %>'>
       <%= render partial: "teas/tea_form", locals: { tea: tea } %>
     </div>
   <% end %>
+
 </div>

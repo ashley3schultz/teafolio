@@ -40,21 +40,10 @@
   <div class="show" id='allPending'>
     <h2 class='tight-title'>Pending Teas</h2>
     <% @p_teas.each do |tea| %>
-    <div id="pendform-<%=tea.id%>">
-      <%= form_for @tea do |f| %>
-        <%= f.text_field :oxidation, value: "#{tea.oxidation}" %>
-        <%= f.text_field :name, value: "#{tea.name}" %>
-        <%= f.text_field :aka, value: "#{tea.aka}"  if tea.aka %><br/>
-        <%= f.text_area :description, value: "#{tea.description}" %><br/>
-        <%= f.hidden_field :id, value: "#{tea.id}" %>
-        <button id="deny"><%= link_to "Deny", "javascript:teaDeny(#{tea.id})", data: {confirm: 'Are you sure you want to delete this tea?'} %></button>
-        <button id="deny"><%= link_to "Approve", "javascript:teaApprove(#{tea.id})" %></button>
-        <%= f.submit :Approve, id: 'approve'%>
+      <div id="pendform-<%=tea.id%>">
+        <%= render partial: "teas/tea_form", locals: { tea: tea } %>
         <br/><br/><br/><br/>
-      <% end %>
-      </div>
       </div>
     <% end %>
   </div>
-
 </div>
