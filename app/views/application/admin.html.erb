@@ -13,13 +13,15 @@
   <div class="hide" id='allUsers'>
     <h2 class='tight-title'>Users</h2>
     <% @users.each do |user| %>
+      <div class="profile" id='userid- <%=user.id%>'>
         <%= user.username %>
         <p>Teas: <%= user.pending_teas.size %> |
         Posts: <%= user.posts.size %> |
         Contributions: <%= user.contributions %></p>
-        <h6 class='tight'><%= link_to "#{user.admin == false ? 'grant' : 'remove'} admin permission", user, :method => :put, data: {confirm: "Are you sure you change status for #{user.username}?" } %></h6>
+        <h6 class='tight'><%= link_to "#{user.admin == false ? 'grant' : 'remove'} admin permission", "javascript:toggleAdmin(#{user.id})", data: {confirm: "Are you sure you change status for #{user.username}?" } %></h6>
         <br/><br/>
-      <% end %>
+      </div>
+    <% end %>
   </div>
 
   <div class="hide" id='allTeas'>
