@@ -49,7 +49,10 @@ class PendingTeasController < ApplicationController
       if owner?(@tea) || admin?
         @tea.destroy
       end
-      redirect_to root_path
+      respond_to do |format|
+        format.json { render json: true }
+        format.html { redirect_to root_path }
+      end
     end
 
     private

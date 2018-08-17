@@ -1,6 +1,5 @@
 class Tea {
   constructor(data){
-    console.log(data)
     this.id = data.id
     this.name = data.attributes.name
     this.aka = data.attributes.aka
@@ -28,6 +27,7 @@ $(function(){
   $('#search').on('input', function(e){e.preventDefault(); search(this)})
   $('#new_post').submit(function(e){e.preventDefault(); createPost(this)})
   $('#new_post textarea').on('click', function(e){resethidden()})
+  $('#new_tea').submit(function(e){e.preventDefault(); teaApprove(this)})
 })
 
 function search(item){
@@ -272,6 +272,34 @@ function deleteTea(teaid){
     url: `/teas/${teaid}`,
     success: function(){
       $(`#teaid-${teaid}`).html('')
+    }
+  })
+}
+
+function teaApprove(obj){
+  var values = $(obj).serialize()
+  var posting = $.post('/teas' + '.json', values)
+  posting.done(function(info){
+    tea = new Tea(info.data)
+    $("#allTeas").append(`
+      <div class="profile" id="teaid-${tea.id}">
+      <h2 class="tight">${tea.oxidation} Tea</h2>
+      <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
+      ${tea.description}<br></div>
+      <h5 class="tight"><a href="javascript:renderTeaForm(${tea.id})">Edit</a> |
+      <a rel="nofollow" data-method="delete" href="javascript:deleteTea(${tea.id})">Delete</a></h5></div>`)
+      $(`#pendform-${' GET PENDING TEA ID '}`).html('')
+  })
+}
+
+function teaDeny(teaid){
+  console.log(teaid)
+  $.ajax({
+    type: 'DELETE',
+    url: `/pending_teas/${teaid}`,
+    success: function(){
+      console.log('success')
+      $(`#pendform-${teaid}`).html('')
     }
   })
 }

@@ -49,13 +49,11 @@ class TeasController < ApplicationController
           p_tea = PendingTea.find_by(id: params[:tea][:id])
           p_tea.user.add_contribution
           p_tea.destroy
-          redirect_to pending_teas_path
-        else
-          @teas = PendingTea.all
-          render :'pending_teas/index'
         end
-      else
-        redirect_to root_path
+      end
+      respond_to do |format|
+        format.json { render json: @tea}
+        format.html { redirect_to root_path }
       end
     end
 
