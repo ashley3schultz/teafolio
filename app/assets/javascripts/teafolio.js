@@ -104,10 +104,11 @@ function teaBtns(id, sec = ''){
 
 function teaProfile(tea, sec = ''){
   $(`${sec}#teaid-${tea.id}`).html(`
+    <div class="show-profile" id='teaprofile-${tea.id}'>
     <h2 class="tight">${tea.oxidation} Tea</h2>
     <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
     ${tea.description}<br>
-    <div class="add-rmv"></div>
+    <div class="add-rmv"></div></div>
     <div class="hide-form" id="teaform-${tea.id}">${$('#newForm')[0].innerHTML}</div>`)
     teaBtns(tea.id, sec)
     $(`${sec}#teaid-${tea.id} form`).attr('class', 'edit_tea')
@@ -249,6 +250,7 @@ function toggleAdmin(userid){
         ${user.admin ? 'remove' : 'grant'} admin permission</a>`)
     }
   })
+
 }
 
 function teaApprove(teaid){
@@ -257,11 +259,10 @@ function teaApprove(teaid){
   var posting = $.post(`/teas.json`, values)
   posting.done(function(info){
     tea = new Tea(info.data)
-    console.log(info)
     $("#allTeas").append(`<div class="profile" id="teaid-${tea.id}">`)
     teaProfile(tea)
-    $(`#pendform-${teaid}`).html('')
   })
+  $(`#pendform-${teaid}`).html('')
 }
 
 function teaDeny(teaid){

@@ -1,9 +1,9 @@
 <div class="side-bar">
   <div class="toggle-nav">
-    <%= link_to "Users: #{@users.size}", "javascript:toggleView('allUsers')" %><br/>
-    <%= link_to "Teas: #{@t_qty}", "javascript:toggleView('allTeas')" %><br/>
-    <%= link_to "Posts: #{@posts.size}", "javascript:toggleView('allPosts')"  %><br/>
-    <%= link_to "Pending Teas: #{@p_teas.size}", "javascript:toggleView('allPending')" %><br/>
+    <%= link_to "Users:", "javascript:toggleView('allUsers')", id: 'user', calss: ''%> <span id="userQty"><%=@users.size%></span><br/>
+    <%= link_to "Teas:", "javascript:toggleView('allTeas')" %> <span id="teaQty"><%=@teas.size%></span><br/>
+    <%= link_to "Posts:", "javascript:toggleView('allPosts')"  %> <span id="postQty"><%=@posts.size%></span><br/>
+    <%= link_to "Pending Teas:", "javascript:toggleView('allPending')" %> <span id="pteaQty"><%=@p_teas.size%></span><br/>
   </div>
 </div>
 
@@ -46,4 +46,8 @@
       </div>
     <% end %>
   </div>
+</div>
+
+<div id="newForm" class='hide'>
+  <%= render partial: "teas/tea_form", locals: { tea: @tea } %>
 </div>
