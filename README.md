@@ -24,7 +24,7 @@ From the command line
   rake db:seed
   ```
   ```
-  'thin start --ssl' to launch application
+  thin start --ssl
   ```
 
 ## Running the tests
