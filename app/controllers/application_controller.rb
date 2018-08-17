@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
         @t_qty = Tea.all.size
         render :admin
       else
+        @tea = Tea.all.first
+        @user = current_user
         @p_teas = PendingTea.all
         @users = User.all
         render :home

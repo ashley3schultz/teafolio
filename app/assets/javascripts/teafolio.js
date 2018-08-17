@@ -62,6 +62,8 @@ function fillEditForm(post){
   $(`#postid-${post.id} form`).attr('id', `edit_post_${post.id}`)
   $(`#postid-${post.id} form`).attr('action', `/posts/${post.id}`)
   $(`#postid-${post.id} textarea`).val(`${post.content}`)
+  $(`#postid-${post.id} #post_tea_id`).val(`${post.tea_id}`)
+  $(`#postid-${post.id} #post_user_id`).val(`${post.user_id}`)
   $(`#postid-${post.id} form`).append(`<input type="hidden" name="_method" value="patch">`)
 }
 
@@ -101,6 +103,8 @@ function updatePost(obj){
     postProfile(post)
     fillEditForm(post)
     resethidden()
+    $('#new_post textarea').val('')
+    $("input").removeAttr('disabled')
   })
 }
 
