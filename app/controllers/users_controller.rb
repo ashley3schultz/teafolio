@@ -43,7 +43,10 @@ class UsersController < ApplicationController
         else
             @user.update(admin: true)
         end
-        redirect_to users_path
+        respond_to do |format|
+          format.json {render json: @user, status: 201}
+          format.html {redirect_to root_path}
+        end
     end
 
     private

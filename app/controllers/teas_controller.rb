@@ -73,13 +73,19 @@ class TeasController < ApplicationController
     end
 
     def update
-        @tea.update(tea_params)
-        redirect_to tea_path(@tea)
+      @tea.update(tea_params)
+      respond_to do |format|
+        format.json { render json: @tea}
+        format.html { redirect_to tea_path(@tea)}
+      end
     end
 
     def destroy
-        @tea.destroy
-        redirect_to root_path
+      @tea.destroy
+      respond_to do |format|
+        format.json { render json: true }
+        format.html { redirect_to root_path }
+      end
     end
 
     private

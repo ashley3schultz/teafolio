@@ -220,6 +220,58 @@ function timer() {
     }
     setTimeout(timer, 1000);
   }else{
+    $('#min').val('')
+    $('#sec').val('')
     alert('alarm')
   }
+}
+
+function toggleAdmin(userid){
+  $.ajax({
+    type: 'PATCH',
+    url: `/users/${userid}.json`,
+    success: function(info){
+      var user = info.data.attributes
+      $(`#userid-${userid} h6.tight`).html(`
+        <a data-confirm="Are you sure you change status for
+        ${'user.username'}?"
+        rel="nofollow" data-method="put"
+        href="javascript:toggleAdmin(${userid})">
+        ${user.admin ? 'remove' : 'grant'} admin permission</a>`)
+    }
+  })
+}
+
+function updateTea(obj){
+  var path = $('.show-form form.edit_tea').attr('action')
+  var values = $(obj).serialize()
+  var posting = $.post(path + '.json', values)
+  posting.done(function(info){
+    tea= new Tea(info.data)
+    $(`#teaprofile-${tea.id}`).html(`
+        <h2 class="tight">${tea.oxidation} Tea</h2>
+        <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
+        ${tea.description}<br></div>
+        <h5 class="tight"><a href="javascript:renderTeaForm(${tea.id})">Edit</a> |
+        <a rel="nofollow" data-method="delete" href="javascript:deleteTea(${tea.id})">Delete</a></h5>`)
+    resethidden()
+    $("input").removeAttr('disabled')
+  })
+}
+
+function renderTeaForm(teaid){
+  resethidden()
+  $(`#teaform-${teaid}`).attr('class', 'show-form')
+  $(`#teaprofile-${teaid}`).attr('class', 'hide-profile')
+  $(`#edit_tea_${teaid}`).submit(function(e){e.preventDefault(); updateTea(this)})
+}
+
+function deleteTea(teaid){
+  $.ajax({
+    type: 'DELETE',
+    url: `/teas/${teaid}`,
+    success: function(){
+      $(`#teaid-${teaid}`).html('')
+    }
+  })
 }
