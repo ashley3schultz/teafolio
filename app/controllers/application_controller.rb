@@ -23,6 +23,25 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def owner
+    tea = Tea.find(params[:tea_id])
+    a = current_user.teas.include?(tea)
+    respond_to do |format|
+      format.json { render json: a }
+      format.html { redirect_to tea_path(tea) }
+    end
+  end
+
+  def admin
+    a = admin?
+    respond_to do |format|
+      format.json { render json: a }
+      format.html { redirect_to tea_path(tea) }
+    end
+  end
+
+  private
+
 
   def logged_in?
     !!current_user

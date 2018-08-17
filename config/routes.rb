@@ -14,8 +14,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:edit]
     get '/rate/:id', to: 'user_teas#rate'
     get '/rate', to: 'user_teas#rating'
-    get '/owner', to: 'users#owner'
-
+    post '/owner', to: 'application#owner'
   end
 
   get 'signup', to: 'users#new'
@@ -26,6 +25,7 @@ Rails.application.routes.draw do
   get 'teas/:id/remove', to: 'teas#remove'
   get '/auth/facebook/callback', to: 'sessions#create'
   get '*path', to: redirect('/')
+  post '/admin', to: 'application#admin'
   root 'application#home'
 
 end

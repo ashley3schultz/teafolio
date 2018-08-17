@@ -77,7 +77,7 @@ function postProfile(post){
 
 function teaBtns(id){
   var data
-  $.get(`/teas/${id}/owner.json`, function(owner){
+  $.post(`/teas/${id}/owner.json`, function(owner){
     if(owner){
       data = `
         <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${id}, 1)">1</a></button>
@@ -87,7 +87,7 @@ function teaBtns(id){
         <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
         <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`
     }else{
-      $.get(`/admin.json`, function(admin){
+      $.post(`/admin.json`, function(admin){
         if(admin){
             data = `<h5 class="tight"><a href="javascript:renderTeaForm(${id})">Edit</a> | <a href="javascript:deleteTea(${id})">Delete</a></h5>`
         }else{
