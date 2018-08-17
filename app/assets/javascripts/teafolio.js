@@ -128,7 +128,7 @@ function teaBtns(id){
         <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
         <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
       $.get(`/teas/${id}/rate.json`, function(num){
-        document.getElementById(`rate-${num}`).setAttribute("class", "selected");
+        $(`#teaid-${id} #rate-${num}`).attr("class", "selected");
       })
     }else{
       $(`#teaid-${id} div.add-rmv`).html(`
