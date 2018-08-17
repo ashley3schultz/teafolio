@@ -1,9 +1,10 @@
-<%= form_for tea do |f| %>
+<% admin? && tea.class == PendingTea ? p_tea = Tea.new : p_tea = tea %>
+<%= form_for p_tea do |f| %>
     <%= f.text_field :name, placeholder: set_ph('name', tea), value: set_value('name', tea) %> <br/>
     <%= f.text_field :aka, placeholder: set_ph('aka', tea), value: set_value('aka', tea) %><br/>
     <%= f.text_field :oxidation, placeholder: set_ph('oxidation', tea), value: set_value('oxidation', tea) %><br/>
     <%= f.text_field :description, placeholder: set_ph('description', tea), value: set_value('description', tea) %><br/>
-    <% if admin? %>
+    <% if admin?  && tea.class == PendingTea %>
       <%= f.hidden_field :id, value: "#{tea.id}" %>
       <button id="a-d"><%= link_to "Deny", "javascript:teaDeny(#{tea.id})", data: {confirm: 'Are you sure you want to delete this tea?'} %></button>
       <button id="a-d"><%= link_to "Approve", "javascript:teaApprove(#{tea.id})" %></button>
