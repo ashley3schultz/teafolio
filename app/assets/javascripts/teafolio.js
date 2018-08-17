@@ -277,8 +277,9 @@ function deleteTea(teaid){
 }
 
 function teaApprove(obj){
+  $(`#pendform-${$(obj).serializeArray()[6]}`).value).html('')
   var values = $(obj).serialize()
-  var posting = $.post('/teas' + '.json', values)
+  var posting = $.post(`/teas.json`, values)
   posting.done(function(info){
     tea = new Tea(info.data)
     $("#allTeas").append(`
@@ -288,7 +289,6 @@ function teaApprove(obj){
       ${tea.description}<br></div>
       <h5 class="tight"><a href="javascript:renderTeaForm(${tea.id})">Edit</a> |
       <a rel="nofollow" data-method="delete" href="javascript:deleteTea(${tea.id})">Delete</a></h5></div>`)
-      $(`#pendform-${$(obj).serializeArray()[6].value}`).html('')
   })
 }
 

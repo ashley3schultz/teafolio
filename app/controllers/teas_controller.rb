@@ -52,7 +52,7 @@ class TeasController < ApplicationController
         end
       end
       respond_to do |format|
-        format.json { render json: @tea}
+        format.json { render json: @tea, status: 201}
         format.html { redirect_to root_path }
       end
     end
