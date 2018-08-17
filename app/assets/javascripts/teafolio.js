@@ -32,12 +32,12 @@ $(function(){
 
 function search(item){
   $('.show').attr('class', 'hide')
-  $('.show-search').html('')
+  $('#show-search').empty()
   var string = $('#search').val()
   $.get(`/search/${string}.json`, function(info){
     info.data.forEach(function(t){
       tea = new Tea(t)
-      $('.show-search').append(`<div class="profile" id="teaid-${tea.id}">
+      $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">
         <h2 class="tight">${tea.oxidation} Tea</h2>
         <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
         ${tea.description}<br><div class="add-rmv"></div></div>`)
@@ -153,10 +153,9 @@ function rmvTea(teaid){
 
 function deletePost(postid){
   $.ajax({
-    type:'DELETE',
-    url:`/posts/${postid}.json`,
-    data:{id: postid},
-    success: function(data){
+    type: 'DELETE',
+    url: `/posts/${postid}`,
+    success: function(){
       $(`#postid-${postid}`).html('')
     }
   })
@@ -198,7 +197,7 @@ function nextTea(teaid){
 }
 
 function toggleView(view){
-  $(`.show-search`).html('')
+  $('#show-search').empty()
   if(view === 'all'){
     $(`.hide`).attr('class', 'show')
   }else{

@@ -54,7 +54,7 @@ class PostsController < ApplicationController
         @post.destroy
       end
       respond_to do |format|
-        format.json { render json: @post}
+        format.json {  render json: true }
         format.html { redirect_to root_path }
       end
     end

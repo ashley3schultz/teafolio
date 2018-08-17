@@ -6,6 +6,15 @@
     <%= link_to "My Posts", "javascript:toggleView('myPosts')" %><br/>
     <%= link_to "My Friends", "javascript:toggleView('myFriends')" %><br/>
   </div>
+
+  <div class="widget">
+    <br/><strong>Timer</strong><br/><br/>
+    <div class="timer">
+      <input type="number" class='timebox' id="min" integer="true" placeholder="00"/>:<input type="number" class='timebox' id="sec" integer="true" placeholder="00"/>
+    </div>
+    <br/><%= link_to 'Start', 'javascript:timer()' %><br/><br/>
+  </div>
+
 </div>
 
 <div class="main-area">
