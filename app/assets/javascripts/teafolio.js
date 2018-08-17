@@ -170,6 +170,8 @@ function deletePost(postid){
       $(`#postid-${postid}`).html('')
     }
   })
+  var p = $(`#postQty`).html()
+  $(`#postQty`).html(--p)
 }
 
 /// TEAS FEATURES //////////////////////////////////////////////////////////////
@@ -232,6 +234,8 @@ function deleteTea(teaid){
       $(`#teaid-${teaid}`).html('')
     }
   })
+  var t = $(`#teaQty`).html()
+  $(`#teaQty`).html(--t)
 }
 
 /// ADMIN ONLY FEATURES ////////////////////////////////////////////////////////
@@ -250,7 +254,6 @@ function toggleAdmin(userid){
         ${user.admin ? 'remove' : 'grant'} admin permission</a>`)
     }
   })
-
 }
 
 function teaApprove(teaid){
@@ -263,6 +266,10 @@ function teaApprove(teaid){
     teaProfile(tea)
   })
   $(`#pendform-${teaid}`).html('')
+  var p = $(`#pteaQty`).html()
+  $(`#pteaQty`).html(--p)
+  var t = $(`#teaQty`).html()
+  $(`#teaQty`).html(++t)
 }
 
 function teaDeny(teaid){
@@ -274,6 +281,8 @@ function teaDeny(teaid){
       $(`#pendform-${teaid}`).html('')
     }
   })
+  var p = $(`#pteaQty`).html()
+  $(`#pteaQty`).html(--p)
 }
 
 /// SPECIAL FEATURES ///////////////////////////////////////////////////////////

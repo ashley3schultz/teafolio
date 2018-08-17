@@ -13,7 +13,7 @@
   <div class="hide" id='allUsers'>
     <h2 class='tight-title'>Users</h2>
     <% @users.each do |user| %>
-      <div class="profile" id='userid- <%=user.id%>'>
+      <div class="profile" id='userid-<%=user.id%>'>
         <%= user.username %>
         <p>Teas: <%= user.pending_teas.size %> |
         Posts: <%= user.posts.size %> |
@@ -34,7 +34,6 @@
   <div class="hide" id='allPosts'>
     <h2 class='tight-title'>Recent Posts</h2>
     <% @posts.each do |post| %>
-      <h3 class='tight'><%= link_to post.tea.name, tea_path(post.tea) %></h3>
         <%= render partial: "posts/post_profile", locals: { post: post } %>
     <% end %>
   </div>
