@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
-  resources :posts, only: [:index, :create, :update, :destroy, :show]
+  resources :posts, only: [:index, :create, :update, :destroy, :show] do
+    post '/owner', to: 'posts#owner'
+  end
+
   resources :pending_teas, only: [:index, :show, :create, :edit, :update, :destroy]
 
   resources :users, only: [:index, :show, :create, :update] do
@@ -14,7 +17,7 @@ Rails.application.routes.draw do
     resources :posts, only: [:edit]
     get '/rate/:id', to: 'user_teas#rate'
     get '/rate', to: 'user_teas#rating'
-    post '/owner', to: 'application#owner'
+    post '/owner', to: 'teas#owner'
   end
 
   get 'signup', to: 'users#new'

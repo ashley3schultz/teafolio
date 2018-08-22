@@ -56,47 +56,83 @@ function renderForm(id, obj){
 
 /// POST TEMPLATES /////////////////////////////////////////////////////////////
 
+function postForm(post){
+  $(`#postid-${post.id}`).append(`
+  <div class="hide-form" id="postform-${post.id}">${$('#newForm')[0].innerHTML}</div>`)
+  $(`#postid-${post.id} form`).attr('class', 'edit_post')
+  $(`#postid-${post.id} form`).attr('id', `edit_post_${post.id}`)
+  $(`#postid-${post.id} form`).attr('action', `/posts/${post.id}`)
+  $(`#postid-${post.id} textarea`).val(`${post.content}`)
+  $(`#postid-${post.id} #post_tea_id`).val(`${post.tea_id}`)
+  $(`#postid-${post.id} #post_user_id`).val(`${post.user_id}`)
+  $(`#postid-${post.id} form`).append(`<input type="hidden" name="_method" value="patch">`)
+}
+
+function postBtns(post){
+  $.post(`/posts/${post.id}/owner.json`, function(owner){
+    console.log(owner)
+    if(owner){
+      $(`#postid-${post.id}`).append(`
+        <h5 class='tight'><a href="javascript:renderForm(${post.id}, 'post')">Edit </a>
+        <a data-confirm="Are you sure you want to delete this post?" href="javascript:deletePost(${post.id})">Delete</a></h5>`)
+      postForm(post)
+    }
+  })
+  $.post(`/admin.json`, function(admin){
+    if(admin){
+      $(`#postid-${id}`).append(`<h5 class='tight'>
+        <a data-confirm="Are you sure you want to delete this post?"
+        href="javascript:deletePost(${post.id})">Delete</a></h5>`)
+    }
+  })
+}
+
 function postProfile(post){
   $(`#postid-${post.id}`).html(`
     <div class="show-profile" id="postprofile-${post.id}">
       <p><strong><a href='/users/${post.user_id}'>${post.user.username}</a>: </strong>${post.content}</p>
-      <h5 class='tight'><a href="javascript:renderForm(${post.id}, 'post')">Edit </a>
-      <a data-confirm="Are you sure you want to delete this post?" href="javascript:deletePost(${post.id})">Delete</a></h5>
-    </div>
-    <div class="hide-form" id="postform-${post.id}">${$('#newForm')[0].innerHTML}</div>`)
-    $(`#postid-${post.id} form`).attr('class', 'edit_post')
-    $(`#postid-${post.id} form`).attr('id', `edit_post_${post.id}`)
-    $(`#postid-${post.id} form`).attr('action', `/posts/${post.id}`)
-    $(`#postid-${post.id} textarea`).val(`${post.content}`)
-    $(`#postid-${post.id} #post_tea_id`).val(`${post.tea_id}`)
-    $(`#postid-${post.id} #post_user_id`).val(`${post.user_id}`)
-    $(`#postid-${post.id} form`).append(`<input type="hidden" name="_method" value="patch">`)
+    </div>`)
+  postBtns(post)
 }
 
 /// TEA TEMPLATES //////////////////////////////////////////////////////////////
 
-function teaBtns(id, sec = ''){
-  $.post(`/teas/${id}/owner.json`, function(owner){
+function teaForm(tea, sec) {
+  $(`${sec}#teaid-${tea.id}`).append(`<div class="hide-form" id="teaform-${tea.id}">${$('#newForm')[0].innerHTML}</div>`)
+  $(`${sec}#teaid-${tea.id} form`).attr('class', 'edit_tea')
+  $(`${sec}#teaid-${tea.id} form`).attr('id', `edit_tea_${tea.id}`)
+  $(`${sec}#teaid-${tea.id} form`).attr('action', `/teas/${tea.id}`)
+  $(`${sec}#teaid-${tea.id} input#tea_oxidation`).val(`${tea.oxidation}`)
+  $(`${sec}#teaid-${tea.id} input#tea_name`).val(`${tea.name}`)
+  $(`${sec}#teaid-${tea.id} input#tea_aka`).val(`${tea.aka}`)
+  $(`${sec}#teaid-${tea.id} textarea#tea_description`).val(`${tea.description}`)
+  $(`${sec}#teaid-${tea.id} input#tea_id`).val(`${tea.id}`)
+  $(`${sec}#teaid-${tea.id} form`).append(`<input type="hidden" name="_method" value="patch">`)
+}
+
+function teaBtns(tea, sec = ''){
+  $.post(`/teas/${tea.id}/owner.json`, function(owner){
     if(owner){
-      $(`${sec}#teaid-${id} div.add-rmv`).html(`
-        <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${id}, 1)">1</a></button>
-        <button class="rate-button" id='rate-2'><a href="javascript:rateTea(${id}, 2)">2</a></button>
-        <button class="rate-button" id='rate-3'><a href="javascript:rateTea(${id}, 3)">3</a></button>
-        <button class="rate-button" id='rate-4'><a href="javascript:rateTea(${id}, 4)">4</a></button>
-        <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${id}, 5)">5</a></button>
-        <h5 class="tight"><a href="javascript:rmvTea(${id})">Remove from collection</a></h5>`)
+      $(`${sec}#teaid-${tea.id} div.add-rmv`).html(`
+        <button class="rate-button" id='rate-1'><a href="javascript:rateTea(${tea.id}, 1)">1</a></button>
+        <button class="rate-button" id='rate-2'><a href="javascript:rateTea(${tea.id}, 2)">2</a></button>
+        <button class="rate-button" id='rate-3'><a href="javascript:rateTea(${tea.id}, 3)">3</a></button>
+        <button class="rate-button" id='rate-4'><a href="javascript:rateTea(${tea.id}, 4)">4</a></button>
+        <button class="rate-button" id='rate-5'><a href="javascript:rateTea(${tea.id}, 5)">5</a></button>
+        <h5 class="tight"><a href="javascript:rmvTea(${tea.id})">Remove from collection</a></h5>`)
     }else{
       $.post(`/admin.json`, function(admin){
         if(admin){
-          $(`${sec}#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:renderForm(${id}, 'tea')">Edit</a> | <a href="javascript:deleteTea(${id})">Delete</a></h5>`)
+          $(`${sec}#teaid-${tea.id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:renderForm(${tea.id}, 'tea')">Edit</a> | <a href="javascript:deleteTea(${tea.id})">Delete</a></h5>`)
+          teaForm(tea, sec)
         }else{
-          $(`${sec}#teaid-${id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:addTea(${id})">Add to collection</a></h5>`)
+          $(`${sec}#teaid-${tea.id} div.add-rmv`).html(`<h5 class="tight"><a href="javascript:addTea(${tea.id})">Add to collection</a></h5>`)
         }
       })
     }
     if(owner){
-      $.get(`/teas/${id}/rate.json`, function(num){
-        $(`${sec}#teaid-${id} #rate-${num}`).attr("class", "selected");
+      $.get(`/teas/${tea.id}/rate.json`, function(num){
+        $(`${sec}#teaid-${tea.id} #rate-${num}`).attr("class", "selected");
       })
     }
   })
@@ -108,18 +144,8 @@ function teaProfile(tea, sec = ''){
     <h2 class="tight">${tea.oxidation} Tea</h2>
     <h3 class="tight"><a href="/teas/${tea.id}">${tea.fullName()}</a></h3>
     ${tea.description}<br>
-    <div class="add-rmv"></div></div>
-    <div class="hide-form" id="teaform-${tea.id}">${$('#newForm')[0].innerHTML}</div>`)
-    teaBtns(tea.id, sec)
-    $(`${sec}#teaid-${tea.id} form`).attr('class', 'edit_tea')
-    $(`${sec}#teaid-${tea.id} form`).attr('id', `edit_tea_${tea.id}`)
-    $(`${sec}#teaid-${tea.id} form`).attr('action', `/teas/${tea.id}`)
-    $(`${sec}#teaid-${tea.id} input#tea_oxidation`).val(`${tea.oxidation}`)
-    $(`${sec}#teaid-${tea.id} input#tea_name`).val(`${tea.name}`)
-    $(`${sec}#teaid-${tea.id} input#tea_aka`).val(`${tea.aka}`)
-    $(`${sec}#teaid-${tea.id} textarea#tea_description`).val(`${tea.description}`)
-    $(`${sec}#teaid-${tea.id} input#tea_id`).val(`${tea.id}`)
-    $(`${sec}#teaid-${tea.id} form`).append(`<input type="hidden" name="_method" value="patch">`)
+    <div class="add-rmv"></div></div>`)
+    teaBtns(tea, sec)
 }
 
 function teaPosts(posts){

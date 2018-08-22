@@ -3,6 +3,15 @@ class PostsController < ApplicationController
     before_action :lo_redirector
     before_action :na_redirector, only: [:index]
 
+    def owner
+      post = Post.find(params[:post_id])
+      a = owner?(post)
+      respond_to do |format|
+        format.json { render json: a }
+        format.html { redirect_to tea_path(tea) }
+      end
+    end
+
     def show
       respond_to do |format|
         format.json { render json: @post, status: 201}
