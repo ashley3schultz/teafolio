@@ -70,7 +70,6 @@ function postForm(post){
 
 function postBtns(post){
   $.post(`/posts/${post.id}/owner.json`, function(owner){
-    console.log(owner)
     if(owner){
       $(`#postid-${post.id}`).append(`
         <h5 class='tight'><a href="javascript:renderForm(${post.id}, 'post')">Edit </a>
@@ -80,7 +79,7 @@ function postBtns(post){
   })
   $.post(`/admin.json`, function(admin){
     if(admin){
-      $(`#postid-${id}`).append(`<h5 class='tight'>
+      $(`#postid-${post.id}`).append(`<h5 class='tight'>
         <a data-confirm="Are you sure you want to delete this post?"
         href="javascript:deletePost(${post.id})">Delete</a></h5>`)
     }
@@ -205,14 +204,16 @@ function deletePost(postid){
 function addTea(teaid){
   var posting = $.get(`/teas/${teaid}/add.json`)
   posting.done(function(info){
-    teaBtns(info.data.id)
+    tea = new Tea(info.data)
+    teaBtns(tea)
   })
 }
 
 function rmvTea(teaid){
   var posting = $.get(`/teas/${teaid}/remove.json`)
   posting.done(function(info){
-    teaBtns(info.data.id)
+    tea = new Tea(info.data)
+    teaBtns(tea)
   })
 }
 
