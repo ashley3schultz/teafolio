@@ -26,6 +26,10 @@ class TeasController < ApplicationController
       else
         @teas = Tea.by_oxidation
       end
+      respond_to do |format|
+        format.json { render json: Tea.all, status: 201}
+        format.html
+      end
     end
 
     def add

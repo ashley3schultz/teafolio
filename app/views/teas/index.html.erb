@@ -19,6 +19,7 @@
 </div>
 
 <div class="main-area">
+  <%= link_to 'a-z', 'javascript:alpha()'%>
   <input type="text" name="search" id='search' placeholder="Search...">
   <div class="show-all" id='all'>
     <% @teas.each do |type, array| %>
