@@ -201,31 +201,6 @@ function deletePost(postid){
 
 /// TEAS FEATURES //////////////////////////////////////////////////////////////
 
-function alpha(){
-  var type = $('#sortAtoZ').attr('class')
-  $('.show').attr('class', 'hide')
-  $('#show-search').empty()
-  var posting = $.get(`/teas.json`)
-  posting.done(function(info){
-    var teas = info.data.sort(function(a, b){
-      var aName = a.attributes.name.toLowerCase()
-      var bName = b.attributes.name.toLowerCase()
-      if(aName < bName){
-        return -1
-      }else{
-        return 1
-      }
-    })
-    teas.forEach(function(t){
-      tea = new Tea(t)
-      if(tea.oxidation === type || type === 'all'){
-        $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">`)
-        teaProfile(tea, '#show-search div')
-      }
-    })
-  })
-}
-
 function addTea(teaid){
   var posting = $.get(`/teas/${teaid}/add.json`)
   posting.done(function(info){
@@ -338,6 +313,31 @@ function teaDeny(teaid){
 }
 
 /// SPECIAL FEATURES ///////////////////////////////////////////////////////////
+
+function alpha(){
+  var type = $('#sortAtoZ').attr('class')
+  $('.show').attr('class', 'hide')
+  $('#show-search').empty()
+  var posting = $.get(`/teas.json`)
+  posting.done(function(info){
+    var teas = info.data.sort(function(a, b){
+      var aName = a.attributes.name.toLowerCase()
+      var bName = b.attributes.name.toLowerCase()
+      if(aName < bName){
+        return -1
+      }else{
+        return 1
+      }
+    })
+    teas.forEach(function(t){
+      tea = new Tea(t)
+      if(tea.oxidation === type || type === 'all'){
+        $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">`)
+        teaProfile(tea, '#show-search div')
+      }
+    })
+  })
+}
 
 function search(item){
   $('.show').attr('class', 'hide')
