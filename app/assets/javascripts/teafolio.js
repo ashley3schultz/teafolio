@@ -202,11 +202,20 @@ function deletePost(postid){
 /// TEAS FEATURES //////////////////////////////////////////////////////////////
 
 function alpha(){
+  $('.show').attr('class', 'hide')
+  $('#show-search').empty()
   var posting = $.get(`/teas.json`)
   posting.done(function(info){
-    var teas = info.data.sort()
-    'https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort'
-    info.data.forEach(function(t){
+    var teas = info.data.sort(function(a, b){
+      var aName = a.attributes.name.toLowerCase()
+      var bName = b.attributes.name.toLowerCase()
+      if(aName < bName){
+        return -1
+      }else{
+        return 1
+      }
+    })
+    teas.forEach(function(t){
       tea = new Tea(t)
       $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">`)
       teaProfile(tea, '#show-search div')
