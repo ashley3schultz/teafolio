@@ -1,4 +1,4 @@
-User.create([
+users = [
     {email: "user1@email.com", username: "user1", password: "password1", admin: false},
     {email: "user2@email.com", username: "user2", password: "password2", admin: false},
     {email: "user3@email.com", username: "user3", password: "password3", admin: false},
@@ -8,17 +8,17 @@ User.create([
     {email: "user7@email.com", username: "user7", password: "password7", admin: false},
     {email: "user8@email.com", username: "user8", password: "password8", admin: false},
     {email: "user9@email.com", username: "user9", password: "password9", admin: false},
-    {email: "admin@email.com", username: "admin", password: "passworda", admin: true}])
+    {email: "admin@email.com", username: "admin", password: "password", admin: true}]
 
-PendingTea.create([
+pending_teas = [
     {name: "Amaranth Star", oxidation: "White", description: "White tea star combined with a single red Amaranth.", user_id: 7},
     {name: "Dragon Pearl Jasmine", aka: "Mo Li Long Zhu", oxidation: "Green", description: "Hand rolled five times infused jasmine Green tea.", user_id: 8},
     {name: "Iron Goddess", aka: "Tie Guan Yin", oxidation: "Oolong", description: "Dark, 25 year aged Tie Guan Yin made in 1992 and stored immaculately.", user_id: 9},
     {name: "Yunnan Black", aka: "Chen Hong Cha", oxidation: "Black", description: "Bright, brisk, black tea balanced by warming dry hay notes and a whisper of grape.", user_id: 7},
     {name: "Young Gushu", aka: "Bing Dao 600 Year Old Gushu Raw", oxidation: "Puerh", description: "Bright and gentle PuErh made from ancient tree leaves picked and blended from the East and West sides of Bingdao.", user_id: 8},
-    {name: "Amber Mountain", aka: "Huo Shan Huang Ya", oxidation: "Yellow", description: "Smooth and elegant tea made in small batches.", user_id: 9}])
+    {name: "Amber Mountain", aka: "Huo Shan Huang Ya", oxidation: "Yellow", description: "Smooth and elegant tea made in small batches.", user_id: 9}]
 
-Tea.create([
+teas = [
     {name: "Blossoming Jewels", oxidation: "White", description: "Our selection of hand produced blossoming tea created by Chinese artisans."},
     {name: "Elder White", aka: "Ye Sheng Ya Bao", oxidation: "White", description: "The precious lateral buds of wild PuErh trees picked in late winter."},
     {name: "Silver Needle", aka: "Bai Hao Yin Zhen", oxidation: "White", description: "Very early spring picked silver beige buds producing a luscious, thick and soft liquor."},
@@ -39,4 +39,19 @@ Tea.create([
     {name: "King Plum", aka: "Yiwu 800 Year Old Gushu PuErh Raw", oxidation: "Puerh", description: "Over twelve year Kunming aged Gushu from the legendary Yiwu mountains."},
     {name: "Black Yunnan Tuo", aka: "Fengqing Shu Tuo", oxidation: "Puerh", description: "Ripe PuErh aged since 1998 in Yunnan."},
     {name: "Fire Phoenix", aka: "Shu PuErh", oxidation: "Puerh", description: "Ripe PuErh made from buds and baby leaves and aged since 2008."},
-    {name: "Diamond Peak", aka: "Junshan Yinzhen", oxidation: "Yellow", description: "Fragrant Yellow tea which is highly prized in China."}])
+    {name: "Diamond Peak", aka: "Junshan Yinzhen", oxidation: "Yellow", description: "Fragrant Yellow tea which is highly prized in China."}]
+
+    users.each do |user|
+      u = User.new(user)
+      u.save(validate: false)
+    end
+
+    pending_teas.each do |tea|
+      t = PendingTea.new(tea)
+      t.save(validate: false)
+    end
+
+    teas.each do |tea|
+      t = Tea.new(tea)
+      t.save(validate: false)
+    end

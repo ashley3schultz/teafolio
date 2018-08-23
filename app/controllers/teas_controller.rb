@@ -75,7 +75,7 @@ class TeasController < ApplicationController
       @user = current_user
       respond_to do |format|
         format.json { render json: @tea}
-        format.html { render :show }
+        format.html
       end
     end
 
@@ -103,10 +103,12 @@ class TeasController < ApplicationController
         def find_tea
           i = params[:id].to_i
           @tea = Tea.find_by(id: i) || nil
-          while !@tea
-            first = Tea.first if i > Tea.last.id
-            @tea = first || Tea.find_by(id: i++) || nil
-            binding.pry
+          if !@tea
+            while !@tea
+              i += 1
+              first = Tea.first if i > Tea.last.id
+              @tea = first || Tea.find_by(id: i) || nil
+            end
           end
         end
 
