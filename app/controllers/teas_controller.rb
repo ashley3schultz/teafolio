@@ -101,7 +101,13 @@ class TeasController < ApplicationController
     private
 
         def find_tea
-            @tea = Tea.find(params[:id])
+          i = params[:id].to_i
+          @tea = Tea.find_by(id: i) || nil
+          while !@tea
+            first = Tea.first if i > Tea.last.id
+            @tea = first || Tea.find_by(id: i++) || nil
+            binding.pry
+          end
         end
 
         def tea_params
