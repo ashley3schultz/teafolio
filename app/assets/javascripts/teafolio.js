@@ -202,6 +202,7 @@ function deletePost(postid){
 /// TEAS FEATURES //////////////////////////////////////////////////////////////
 
 function alpha(){
+  var type = $('#sortAtoZ').attr('class')
   $('.show').attr('class', 'hide')
   $('#show-search').empty()
   var posting = $.get(`/teas.json`)
@@ -217,8 +218,10 @@ function alpha(){
     })
     teas.forEach(function(t){
       tea = new Tea(t)
-      $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">`)
-      teaProfile(tea, '#show-search div')
+      if(tea.oxidation === type || type === 'all'){
+        $('#show-search').append(`<div class="profile" id="teaid-${tea.id}">`)
+        teaProfile(tea, '#show-search div')
+      }
     })
   })
 }
@@ -350,6 +353,7 @@ function search(item){
 }
 
 function toggleView(view){
+  $('#sortAtoZ').attr('class', view)
   $('#show-search').empty()
   if(view === 'all'){
     $(`.hide`).attr('class', 'show')
