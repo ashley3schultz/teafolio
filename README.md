@@ -12,7 +12,7 @@ Teafolio is a social app where members can build a tea portfolio, comment on tea
 * Member can sign up and login with secure password
 * Member can contribute teas
 * Member can make posts on any teas, then edit or delete those posts
-* Member and add and remove teas from their collection
+* Member can add and remove teas from their collection
 * Member can accumulate connections with other users based on their tea collection
 
 ### Admin features
