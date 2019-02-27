@@ -21,8 +21,8 @@ Teafolio is a social app where members can build a tea portfolio, comment on tea
 * Admin can delete any post
 * Admin can grant or remove admin permissions for other members.
 
-## Using the API
-Superiori-Tea-API is hosted on Heroku and can be viewed at https://superiori-tea-api.herokuapp.com/
+## The Live App
+Teafolio is hosted on Heroku and can be viewed at https://teafolio.herokuapp.com/
 
 ## Manual Installation 
 
