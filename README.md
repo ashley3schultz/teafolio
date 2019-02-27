@@ -1,7 +1,7 @@
 # Teafolio
 **A social engineering application for tea drinkers**
 
-Teafolio is a social app where members can build a tea portfolio, comment on teas, contribute teas to the site and make connections based on simular tea interests. 
+Teafolio is a social app where members can build a tea portfolio, comment on teas, contribute teas to the site and make connections based on similar tea interests. 
 
 [View Website](https://teafolio.herokuapp.com/)
 
@@ -9,7 +9,7 @@ Teafolio is a social app where members can build a tea portfolio, comment on tea
 
 ## Application features
 ### Membership features
-* Member can signup and login with secure password
+* Member can sign up and login with secure password
 * Member can contribute teas
 * Member can make posts on any teas, then edit or delete those posts
 * Member and add and remove teas from their collection
@@ -22,12 +22,12 @@ Teafolio is a social app where members can build a tea portfolio, comment on tea
 * Admin can grant or remove admin permissions for other members.
 
 ## Using the API
-Superiori-Tea-API is hosted on heroku and can be viewed at https://superiori-tea-api.herokuapp.com/
+Superiori-Tea-API is hosted on Heroku and can be viewed at https://superiori-tea-api.herokuapp.com/
 
-## Munnual Installation 
+## Manual Installation 
 
 ### Getting Started 
-Make sure Ruby, Rails andJavascript is installed on your device.
+Make sure Ruby, Rails and JavaScript is installed on your device.
 
 ### Installing
 From the command line:
@@ -61,5 +61,6 @@ From the command line:
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details
 
-## Referances
-* [Live Webite](https://teafolio.herokuapp.com/)
+## References
+* [Live Website](https://teafolio.herokuapp.com/)
+
